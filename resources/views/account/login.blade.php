@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <button class="btn btn-purple btn-xs">Đăng nhập</button>
                    
-                    <a class="btn btn-purple btn-xs" href="">Quên mật khẩu</a>
+                    <a class="btn btn-purple btn-xs" href="{{route('frontend.account.reset_password.index')}}">Quên mật khẩu</a>
                 </div>
             </form>
         </div>

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{Product, Transactions, Orders};
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TransactionSuccess;
 use Cart;
 use Auth;
 class ShoppingCartController extends Controller
@@ -37,6 +39,7 @@ class ShoppingCartController extends Controller
         $transactions->tst_note = $Request->tst_note;
         $transactions->save();
         $shopping = Cart::content();
+        Mail::to($Request->tst_email)->send(new TransactionSuccess($shopping));
         foreach($shopping as $key =>$item){
             $order = new Orders;
             $order->od_transaction_id = $transactions->id;
@@ -51,5 +54,19 @@ class ShoppingCartController extends Controller
         Cart::destroy();
         return redirect()->back();
 
+    }
+    public function update(Request $request,$id,$rowId, $qty){
+        if($request->ajax()){
+            $product = Product::find($id);
+            if($product->pro_number < $qty)
+            {
+                return response(['messages'=>'Không đủ số lượng sản phẩm cần update']);
+            }
+
+            Cart::update($rowId, $qty); 
+                return response(['messages'=>'Cập nhật thành công']);
+        }
+        
+       
     }
 }

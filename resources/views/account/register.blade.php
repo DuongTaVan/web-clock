@@ -3,6 +3,7 @@
     <style>
 		<?php $style = file_get_contents('css/auth.min.css');echo $style;?>
     </style>
+
 @stop
 @section('content')
     <div class="container">
@@ -60,8 +61,13 @@
                     @endif
                 </div>
                 <div class="form-group">
+                    <div class="col-md-offset-4 col-md-6">
+                        <div class="g-recaptcha" data-sitekey="6LcqPUIoiUNFAH_5KVxMGYDu76BS62jBqjJ3dRU1" data-callback="YourOnSubmitFn"></div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <button class="btn btn-purple btn-xs">Đăng ký</button>
-                    <a class="btn btn-purple btn-xs" href="">Quên mật khẩu</a>
+                    <a class="btn btn-purple btn-xs" href="{{route('frontend.account.reset_password.index')}}">Quên mật khẩu</a>
                 </div>
             </form>
         </div>

@@ -11,8 +11,8 @@
                 </a>
             </div>
             <div class="search">
-                <form action="" role="search" method="post">
-                    <input type="text" name="keyword" class="form-control" placeholder="Tìm kiếm sản phẩm ...">
+                <form action="{{route('frontend.product.index')}}" role="search" method="get">
+                    <input type="text" name="k" value="{{Request::get('k')}}" class="form-control" placeholder="Tìm kiếm sản phẩm ...">
                     <button type="submit" class="btnSearch">
                         <i class="fa fa-search"></i>
                         <span>Tìm kiếm</span>
@@ -25,7 +25,7 @@
                             <span class="text">
                                 <span class="">Giỏ hàng ({{Cart::count()}})</span>
                                 <span></span>
-	                        </span>
+                            </span>
                         </a>
                     </li>
                     <li>
@@ -79,16 +79,17 @@
             <div class="menu-right">
                 <div class="left">
                     <ul>
-                        @foreach($category as $cate)
+                        
+                        
                         <li>
                             <a href="" title="{{$cate->c_name}}">
-									<span class="name">
-										{{$cate->c_name}}
-									</span>
+                                    <span class="name">
+                                        dong ho
+                                    </span>
                                 
                             </a>
                         </li>
-                        @endforeach
+                       
                         @if(!isset(Auth::user()->name))
                         <li>
                             <a href="{{route('frontend.account.login.index')}}" title="Dangnhap">
@@ -108,13 +109,14 @@
                         </li>
                         @else
                         <li>
-                            <a href="" title="Dangnhap">
+                            <a href="{{route('frontend.account.dashboard')}}" title="Dangnhap">
 
                                     <span class="name">
                                         {{Auth::user()->name}}
                                     </span>  
                             </a>
                         </li>
+                      
                         <li>
                             <a href="{{route('frontend.account.logout.index')}}" title="Dangki">
                                     <span class="name">

@@ -50,7 +50,14 @@
             break;
         }
     }
+    $('.js-show-login').click(function(){
+        console.log('a');
+        event.preventDefault();
+        toastr.warning('Bạn phải đăng nhập để thực hiện tính năng này');
+        return false;
+    })
 </script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
 </body>
 </html>

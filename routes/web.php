@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::group(['prefix'=>'account'],function(){
     Route::get('','Account\AdminController@index')->name('admin.account.index');
     Route::post('postLogin','Account\AdminController@postLogin');
@@ -32,6 +33,43 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
 		return view('admin.index');
 	});
 
+    Route::group(['prefix'=>'admin'],function(){
+        //list user
+        Route::get('','RolePermission\AdminController@getIndex')->name('user.list')->middleware('checkAcl:admin-list');
+        //create user
+        Route::get('create','RolePermission\AdminController@create')->name('user.add')->middleware('checkAcl:admin-add');;
+        Route::post('create','RolePermission\AdminController@store')->name('user.postadd')->middleware('checkAcl:admin-add');;
+        Route::get('edit/{id}','RolePermission\AdminController@edit')->name('user.edit')->middleware('checkAcl:admin-edit');;
+        Route::post('postedit/{id}','RolePermission\AdminController@postedit')->name('user.postedit')->middleware('checkAcl:admin-edit');;
+        Route::get('delete/{id}','RolePermission\AdminController@delete')->name('user.delete')->middleware('checkAcl:admin-delete');
+    });
+    //Role
+    Route::group(['prefix'=>'roles'],function(){
+        //list user
+        Route::get('','RolePermission\RoleController@getIndex')->name('role.list')->middleware('checkAcl:role-list');
+        //create user
+        Route::get('create','RolePermission\RoleController@create')->name('role.add')->middleware('checkAcl:role-add');;
+        Route::post('create','RolePermission\RoleController@store')->name('role.postadd')->middleware('checkAcl:role-add');;
+        Route::get('edit/{id}','RolePermission\RoleController@edit')->name('role.edit')->middleware('checkAcl:role-edit');;
+        Route::post('postedit/{id}','RolePermission\RoleController@postedit')->name('role.postedit')->middleware('checkAcl:role-edit');;
+        Route::get('delete/{id}','RolePermission\RoleController@delete')->name('role.delete')->middleware('checkAcl:role-delete');;
+    });
+    //Permission
+    Route::group(['prefix'=>'permission'],function(){
+        //list user
+        Route::get('','RolePermission\PermissionController@getIndex')->name('permission.list');
+        //create user
+        Route::get('create','RolePermission\PermissionController@create')->name('permission.add');
+        Route::post('create','RolePermission\PermissionController@store')->name('permission.postadd');
+        Route::get('edit/{id}','RolePermission\PermissionController@edit')->name('permission.edit');
+        Route::post('postedit/{id}','RolePermission\PermissionController@postedit')->name('permission.postedit');
+        Route::get('delete/{id}','RolePermission\PermissionController@delete')->name('permission.delete');
+    });
+
+
+
+
+
 	Route::group(['prefix' => 'category'], function(){
         Route::get('','Admin\AdminCategoryController@index')->name('admin.category.index');
         Route::get('create','Admin\AdminCategoryController@create')->name('admin.category.create');
@@ -43,6 +81,9 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('active/{id}','Admin\AdminCategoryController@active')->name('admin.category.active');
         Route::get('hot/{id}','Admin\AdminCategoryController@hot')->name('admin.category.hot');
         Route::get('delete/{id}','Admin\AdminCategoryController@delete')->name('admin.category.delete');
+    });
+    Route::group(['prefix'=>'statistical'], function(){
+        Route::get('','Admin\AdminStatisticalController@index')->name('admin.statistical.index');
     });
 
     Route::group(['prefix' => 'menu'], function(){
@@ -84,11 +125,11 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
     });
 
     Route::group(['prefix' => 'transaction'], function(){
-        Route::get('','Admin\AdminTransactionController@index')->name('admin.transaction.index');
-        Route::get('delete/{id}','Admin\AdminTransactionController@delete')->name('admin.transaction.delete');
-        Route::get('view-transaction/{id}','Admin\AdminTransactionController@getTransactionDetail')->name('ajax.admin.transaction.detail');
-        Route::get('delete-order/{id}','Admin\AdminTransactionController@delete_order')->name('ajax.admin.transaction.delete_order');
-        Route::get('action/{active}/{id}','Admin\AdminTransactionController@active')->name('admin.transaction.active');
+        Route::get('','Admin\AdminTransactionController@index')->name('admin.transaction.index')->middleware('checkAcl:transport');
+        Route::get('delete/{id}','Admin\AdminTransactionController@delete')->name('admin.transaction.delete')->middleware('checkAcl:transport');
+        Route::get('view-transaction/{id}','Admin\AdminTransactionController@getTransactionDetail')->name('ajax.admin.transaction.detail')->middleware('checkAcl:transport');
+        Route::get('delete-order/{id}','Admin\AdminTransactionController@delete_order')->name('ajax.admin.transaction.delete_order')->middleware('checkAcl:transport');
+        Route::get('action/{active}/{id}','Admin\AdminTransactionController@active')->name('admin.transaction.active')->middleware('checkAcl:transport');
     });
 
 
@@ -103,6 +144,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('hot/{id}','Admin\AdminProductController@hot')->name('admin.product.hot');
         Route::get('active/{id}','Admin\AdminProductController@active')->name('admin.product.active');
         Route::get('delete/{id}','Admin\AdminProductController@delete')->name('admin.product.delete');
+        Route::get('delete-image/{id}','Admin\AdminProductController@deleteImage')->name('admin.product.delete_image');
         
     });
 
@@ -129,6 +171,10 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         
         Route::get('delete/{id}','Admin\AdminUserController@delete')->name('admin.user.delete');
     });
+    Route::group(['prefix' => 'rating'], function(){
+        Route::get('','Admin\RatingController@index')->name('admin.rating.index');
+        Route::get('delete/{id}','Admin\RatingController@delete')->name('admin.rating.delete');
+    });
     
 });
 
@@ -138,6 +184,7 @@ Route::group(['prefix'=>'frontend'], function(){
     Route::get('home','Frontend\FrontendHomeController@index')->name('frontend.home.index');
     Route::get('san-pham','Frontend\FrontendProductController@index')->name('frontend.product.index');
     Route::get('san-pham/{slug}','Frontend\FrontendDetailController@index')->name('frontend.detail.index');
+    Route::get('san-pham/{slug}/danh-gia','Frontend\FrontendDetailController@getRating')->name('frontend.detail.rating');
     Route::get('bai-viet','Frontend\BlogController@index')->name('frontend.blog.index');
     Route::get('bai-viet/{slug}','Frontend\ArticleDetailController@index')->name('frontend.blog_detail.index');
     Route::group(['prefix'=>'account'], function(){
@@ -146,20 +193,38 @@ Route::group(['prefix'=>'frontend'], function(){
         Route::post('register','Account\RegisterController@create');
         Route::get('login','Account\RegisterController@Login')->name('frontend.account.login.index');
         Route::post('login','Account\RegisterController@PostLogin');
-         Route::get('logout','Account\RegisterController@Logout')->name('frontend.account.logout.index');
+        Route::get('logout','Account\RegisterController@Logout')->name('frontend.account.logout.index');
+
+        Route::get('reset-password','Account\ResetPasswordController@index')->name('frontend.account.reset_password.index');
+        Route::post('reset-password','Account\ResetPasswordController@checkEmailResetPassword');
+        Route::get('new-password','Account\ResetPasswordController@newPassword')->name('get.new_password');
+        Route::post('new-password','Account\ResetPasswordController@savePassword');
     
     });
 
-    Route::group(['prefix'=>'article'], function(){
+    Route::group(['prefix'=>'user'], function(){
+        Route::get('dashboard', 'Account\DashboardController@index')->name('frontend.account.dashboard');
+        Route::get('update-info', 'Account\DashboardController@edit')->name('frontend.account.edit');
+        Route::post('update-info/{id}', 'Account\DashboardController@update')->name('frontend.account.update');
+        Route::get('transaction', 'Account\DashboardController@transaction')->name('frontend.account.transaction');
+        Route::post('ajax-favorite/{id}','Account\FavoriteController@addFavorite')->name('ajax_get.user.add_favorite');
+        Route::get('favorite', 'Account\FavoriteController@favorite')->name('frontend.account.favorite');
+        Route::post('ajax_rating','User\RatingController@ajaxRating')->name('user.ajax_rating');
+        Route::post('ajax_comment','User\CommentController@ajaxComment')->name('get_ajax_comment');
+        Route::post('ajax_rep_comment','User\CommentController@ajaxRepComment')->name('get_ajax_rep_comment');
+        
+    });
+
+
+     Route::group(['prefix'=>'article'], function(){
     
         Route::get('','Frontend\FrontendArticleController@index')->name('frontend.article.index');
        
-        Route::get('login','Frontend\FrontendArticalController@Login')->name('frontend.account.login.index');
+        Route::get('login','Frontend\FrontendArticalController@Login');
        
-        Route::get('logout','Frontend\FrontendArticalController@Logout')->name('frontend.account.logout.index');
+        Route::get('logout','Frontend\FrontendArticalController@Logout');
     
     });
-
     // cart
     Route::get('don-hang','Frontend\ShoppingCartController@index')->name('frontend.shopping.index');
     Route::group(['prefix'=>'shopping'], function(){
@@ -171,6 +236,7 @@ Route::group(['prefix'=>'frontend'], function(){
         Route::get('update/{id}','Frontend\ShoppingCartController@update')->name('frontend.shopping.update');
 
         Route::post('pay','Frontend\ShoppingCartController@postpay');
+        Route::get('update/{id}/{rowId}/{qty}','Frontend\ShoppingCartController@update')->name('frontend.shopping.update');
     
     });
 });

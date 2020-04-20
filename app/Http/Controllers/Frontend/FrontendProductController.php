@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 use App\Models\{Attributes, Product};
 class FrontendProductController extends Controller
 {
     public function index(Request $request){
+        //Mail::to('duongtv2712@gmail.com')->send(new OrderShipped());
         $paramAtbSearch = $request->except('price');
         //dd($paramAtbSearch);
         $paramAtbSearch = array_values($paramAtbSearch);
