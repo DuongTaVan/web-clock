@@ -2,12 +2,12 @@
     <div class="imageSlide js-banner owl-carousel">
         <div>
             <a href="https://bom.to/mye3CD" title="">
-                <img alt="DQW" src="https://www.dangquangwatch.vn/upload/slideshow/2011910116_Cyber-Monday.jpg" />
+                <img alt="DQW" src="{{asset('images/salebanner.jpg')}}" />
             </a>
         </div>
         <div>
             <a href="https://bom.to/mye3CD" title="">
-                <img alt="DQW" src="https://www.dangquangwatch.vn/upload/slideshow/993732684_DangQuang_T9350K.jpg" />
+                <img alt="DQW" src="{{asset('images/banner_giao-hang.jpg')}}" />
             </a>
         </div>
     </div>

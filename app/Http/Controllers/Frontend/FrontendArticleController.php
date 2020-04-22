@@ -10,4 +10,8 @@ class FrontendArticleController extends Controller
     public function index(){
     	return view('frontend.pages.article_detail.index');
     }
+    public function Login(){
+    	dd(1);
+    	return view('frontend.account.login');
+    }
 }

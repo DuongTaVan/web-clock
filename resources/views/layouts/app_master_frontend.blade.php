@@ -13,6 +13,8 @@
         
     @endif
      <link rel="stylesheet" type="text/css" href="https://codeseven.github.io/toastr/build/toastr.min.css">
+     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+         
     @yield('css')
     {{-- Thông báo --}}
     @if(session('toastr'))
@@ -50,7 +52,14 @@
             break;
         }
     }
+    $('.js-show-login').click(function(){
+        console.log('a');
+        event.preventDefault();
+        toastr.warning('Bạn phải đăng nhập để thực hiện tính năng này');
+        return false;
+    })
 </script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
 </body>
 </html>

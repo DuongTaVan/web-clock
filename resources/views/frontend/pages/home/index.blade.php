@@ -1,18 +1,28 @@
 @extends('layouts.app_master_frontend')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/home.min.css') }}">
+    <style type="text/css">
+            .rating i.active{
+                color: #faca51;
+            }
+            .rating i.no_active{
+                color: #e8e8e8;
+            }
+           
+            
+        </style>
 @stop
 @section('content')
     @include('frontend/components.slider')
     <div class="container">
         <div class="logo-partner">
-            @for($i = 0; $i < 6; $i++)
+            @foreach($trademarks as $trademark)
                 <div class="item">
-                    <a href="#" title="Đồng hồ Atlantic Swiss">
-                        <img class="lazyload" src="https://www.dangquangwatch.vn/view/Pic/Jacques.jpg" data-src="" alt="Atlantic Swiss" />
+                    <a href="" title="{{$trademark->trm_name}}">
+                        <img class="lazyload" src="{{asset($trademark->image)}}" data-src="" alt="Atlantic Swiss" />
                     </a>
                 </div>
-            @endfor
+            @endforeach
         </div>
         <div class="product-one">
             <div class="top">
@@ -47,7 +57,7 @@
 
         <div class="product-three">
             <div class="top">
-                <a href="#" title="" class="main-title">SẢN PHẨM MỚI</a>
+                <a href="#" title="" class="main-title">ĐỒNG HỒ DIAMOND D</a>
             </div>
             <div class="bot">
                 <div class="left">
@@ -58,18 +68,20 @@
                     </div>
                 </div>
                 <div class="right">
-                    @for($i=0; $i < 4; $i++)
+                    @if(isset($diamonds->product))
+                    @foreach($diamonds->product as $item)
                         <div class="item">
-                            @include('frontend/components.product_item')
+                            @include('frontend/components.product_item',['pr'=>$item])
                         </div>
-                    @endfor
+                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>
 
         <div class="product-three">
             <div class="top">
-                <a href="#" title="" class="main-title">SẢN PHẨM MỚI</a>
+                <a href="#" title="" class="main-title">ĐỒNG HỒ PHILIPPE AUGUSTE</a>
             </div>
             <div class="bot">
                 <div class="left">
@@ -80,11 +92,11 @@
                     </div>
                 </div>
                 <div class="right">
-                    @for($i=0; $i < 4; $i++)
+                    @foreach($philippes->product as $item)
                         <div class="item">
-                            @include('frontend/components.product_item')
+                            @include('frontend/components.product_item',['pr'=>$item])
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -94,37 +106,43 @@
                 <a href="#" class="main-title">ĐỒNG HỒ ATLANTIC SWISS</a>
             </div>
             <div class="bot">
-                @for($i=0; $i < 4; $i++)
+                @if(isset($diamonds->product))
+                @foreach($diamonds->product as $item)
                     <div class="item">
-                        @include('frontend/components.product_item')
+                        @include('frontend/components.product_item',['pr'=>$item])
                     </div>
-                @endfor
+                @endforeach
+                @endif
             </div>
         </div>
 
         <div class="product-five">
             <div class="top">
-                <a href="#" class="main-title">ĐỒNG HỒ ARIES GOLD</a>
+                <a href="#" class="main-title">BÚT KÍ CAO CẤP</a>
             </div>
             <div class="bot js-product-5 owl-carousel owl-theme owl-custom">
-                @for($i=0; $i < 8; $i++)
+                @if(isset($pens->product))
+                @foreach($pens->product as $item)
                     <div class="item">
-                        @include('frontend/components.product_item')
+                        @include('frontend/components.product_item',['pr'=>$item])
                     </div>
-                @endfor
+                @endforeach
+                @endif
             </div>
         </div>
 
         <div class="product-two">
             <div class="top">
-                <a href="#" class="main-title">ĐỒNG HỒ ARIES GOLD</a>
+                <a href="#" class="main-title">KÍNH MẮT THỜI TRANG</a>
             </div>
             <div class="bot">
-                @for($i=0; $i < 4; $i++)
+                @if(isset($glasses->product))
+                @foreach($glasses->product as $item)
                     <div class="item">
-                        @include('frontend/components.product_item')
+                        @include('frontend/components.product_item',['pr'=>$item])
                     </div>
-                @endfor
+                @endforeach
+                @endif
             </div>
         </div>
     </div>

@@ -4,16 +4,21 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 use App\Models\{Attributes, Product};
 class FrontendProductController extends Controller
 {
     public function index(Request $request){
+        //Mail::to('duongtv2712@gmail.com')->send(new OrderShipped());
         $paramAtbSearch = $request->except('price');
         //dd($paramAtbSearch);
         $paramAtbSearch = array_values($paramAtbSearch);
         //dd($paramAtbSearch);
         $product = Product::whereRaw(1);
-        
+        if($request->k){
+            $product->where('pro_name','like','%'.$request->k.'%');
+        }
         if($request->price){
             $price = $request->price;
             if($price == 6)
@@ -22,11 +27,16 @@ class FrontendProductController extends Controller
                 $product->where('pro_price','<=',1000000*$price*2);
             
         }
+        $model_product = new Product();
+        //dd($model_product);
+        $country = $model_product->country;
+       // dd($country);
+
     	$attributes = $this->syncAttributeGroup();
         $product = $product->where('pro_active',1);
         $product = $product->orderBy('id','DESC')->paginate(12);
     	//dd($product);
-    	$viewData = ['attributes'=>$attributes,'product'=>$product];
+    	$viewData = ['attributes'=>$attributes,'product'=>$product,'country'=>$model_product->country];
     	return view('frontend.pages.product.index',$viewData);
     }
     public function syncAttributeGroup(){

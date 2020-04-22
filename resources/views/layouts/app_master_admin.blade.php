@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -144,7 +143,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="source/admin/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{get_data_user('admin','name')}}</span>
+              <span class="hidden-xs">{{\Auth::guard('admin')->user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -222,15 +221,16 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+          <a href="">
+            <i class="fa fa-dashboard"></i> <span>Role Permission</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="{{route('user.list')}}"><i class="fa fa-circle-o"></i> Admin</a></li>
+            <li><a href="{{route('role.list')}}"><i class="fa fa-circle-o"></i> Role</a></li>
+            <li><a href="{{route('permission.list')}}"><i class="fa fa-circle-o"></i> Permission</a></li>
           </ul>
         </li>
        
@@ -286,6 +286,13 @@
         <li class="">
           <a href="{{route('admin.article.index')}}">
             <i class="fa fa-file-text-o"></i> <span>Article</span>
+            
+          </a>
+          
+        </li>
+        <li class="">
+          <a href="{{route('admin.rating.index')}}">
+            <i class="fa fa-file-text-o"></i> <span>Rating</span>
             
           </a>
           
@@ -376,7 +383,8 @@
         <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+        <li><a href="{{route('admin.statistical.index')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Statistical</span></a></li>
+        <li><a href="{{route('admin.trademark.index')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Trademark</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
       </ul>
     </section>
@@ -611,7 +619,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="source/admin/adminlte/dist/js/demo.js"></script>
 <script src="source/admin/adminlte/bower_components/select2/dist/js/select2.min.js"></script>
-
+@yield('script')
 <script type="text/javascript">
   // To make Pace works on Ajax calls
   $(document).ajaxStart(function () {
@@ -702,6 +710,24 @@
             })
 
 </script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#demo_image').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    $("#uploadfile").change(function () {
+        readURL(this);
+    });
+</script>
+
 
 </body>
 </html>
