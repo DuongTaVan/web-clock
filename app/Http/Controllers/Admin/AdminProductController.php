@@ -59,6 +59,9 @@ class AdminProductController extends Controller
             $kwd->pk_keyword_id  = $kw;
             $kwd->save();
         }
+        if ($Request->file) {
+                $this->syncAlbumImageAndProduct($Request->file, $product->id);
+            }
 
     	return redirect()->route('admin.product.index');
     }
@@ -81,8 +84,11 @@ class AdminProductController extends Controller
         $attributes = $this->syncAttributeGroup();
         $attributesOld = ProductAttribute::where('pa_product_id',$id)->pluck('pa_attribute_id')->toArray();
         $keywordOld = ProductKeyword::where('pk_product_id',$id)->pluck('pk_keyword_id')->toArray();
+        $images = \DB::table('product_images')
+            ->where("pi_product_id", $id)
+            ->get();
        // dd($attributesOld);
-    	return view('admin.product.update', compact('product','categories','attributes','attributesOld','keywords','keywordOld'));
+    	return view('admin.product.update', compact('product','categories','attributes','attributesOld','keywords','keywordOld','images'));
     }
     public function update(AdminRequestProduct $Request, $id){
     	$product =  Product::find($id);
@@ -121,7 +127,35 @@ class AdminProductController extends Controller
             $kwd->pk_keyword_id  = $kw;
             $kwd->save();
         }
+        if($Request->file){
+            $this->syncAlbumImageAndProduct($Request->file, $id);
+        }
     	return redirect()->route('admin.product.index');
+    }
+    public function syncAlbumImageAndProduct($files, $productID){
+        foreach ($files as $key => $fileImage) {
+            $ext = $fileImage->getClientOriginalExtension();
+            $extend = [
+                'png','jpg','jpeg','PNG','JPG'
+            ];
+
+            if (!in_array($ext, $extend)) return false;
+
+            $filename = date('Y-m-d__').Str::slug($fileImage->getClientOriginalName()).'.'.$ext;
+            $path = public_path().'/uploads/'.date('Y/m/d/');
+            if (!\File::exists($path)){
+                mkdir($path, 0777, true);
+            }
+
+            $fileImage->move($path, $filename);
+            \DB::table('product_images')
+            ->insert([
+                'pi_name' => $fileImage->getClientOriginalName(),
+                'pi_slug' => $filename,
+                'pi_product_id' => $productID,
+                'created_at' => Carbon::now()
+            ]);
+        }
     }
     public function delete($id){
     	$product = Product::find($id);
@@ -141,5 +175,10 @@ class AdminProductController extends Controller
             $groupAttribute[$key][]= $attribute->toArray();
         }
         return $groupAttribute;
+    }
+    public function deleteImage($imageID)
+    {
+        \DB::table('product_images')->where('id', $imageID)->delete();
+        return redirect()->back();
     }
 }

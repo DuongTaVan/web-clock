@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Account;
 use App\Http\Requests\AccountRequestRegister;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\EmailRegister;
 use App\User;
+use Mail;
 use Auth;
 class RegisterController extends Controller
 {
@@ -19,6 +21,7 @@ class RegisterController extends Controller
     	$user->phone = $Request->phone;
         $user->address = $Request->address;
     	$user->save();
+        Mail::to($Request->email)->send(new EmailRegister($Request->name));
     	return redirect()->route('frontend.account.login.index');
     }
     public function login(){

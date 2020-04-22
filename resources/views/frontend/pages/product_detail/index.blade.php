@@ -1,26 +1,56 @@
 @extends('layouts.app_master_frontend')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/product_detail.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/review.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/comments.css') }}">
+    <style type="text/css">
+            .item_review i.active{
+                color: #faca51;
+            }
+            .item_review i.no_active{
+                color: #eff0f5;
+            }
+            .item_success {
+                color: #049802;
+            }
+            .item_footer{
+                color: #8e8e8e;
+            }
+            .btn-load-rating{
+                padding: 5px 20px;
+                color: #288ad6;
+                border:solid 1px #288ad6;
+                border-radius: 3px;
+                text-align: center;
+                box-sizing: border-box;
+                margin: 20px 0 20px;
+            }
+            
+        </style>
+
 @stop
 @section('content')
     <div class="container">
+        
         @include('frontend/components/breadcrumb')
+
         <div class="card">
             <div class="card-body info-detail">
                 <div class="left">
                     <div class="slider-pro" id="my-slider">
                         <div class="sp-slides">
                             <!-- Slide 1 -->
+                            @foreach($product_images as $product_image)
                             <div class="sp-slide">
-                                <img class="sp-image" src="{{ url('images/banner/dongho.jpg') }}" alt="">
+                                <img class="sp-image" src="{{pare_url_file($product_image->pi_slug)}}" alt="">
                             </div>
-                            <div class="sp-slide">
-                                <img class="sp-image" src="{{ url('images/banner/dongho.jpg') }}" alt="">
-                            </div>
+                            @endforeach
+                            
                         </div>
                         <div class="sp-thumbnails">
-                            <img class="sp-thumbnail" src="{{ url('images/banner/dongho.jpg') }}" />
-                            <img class="sp-thumbnail" src="{{ url('images/banner/dongho.jpg') }}" />
+                            @foreach($product_images as $product_image)
+                            <img class="sp-thumbnail" src="{{pare_url_file($product_image->pi_slug)}}" />
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -41,9 +71,9 @@
                                     <span>Mua ngay</span>
                                     <span>Hotline: 1800.6005</span>
                                 </a>
-                                <a href="#" title="" onclick="add_cart_detail('17617',1);" class="muatragop">
-                                    <span>Mua trả góp 0%</span>
-                                    <span>Visa, Master, JCB</span>
+                                <a href="{{route('ajax_get.user.add_favorite',$product->id)}}" title="Thêm sản phẩm yêu thích" class="muatragop js-add-favorite">
+                                    <span>Sản phẩm</span>
+                                    <span>Yêu thích</span>
                                 </a>
                             </div>
                             <div class="infomation">
@@ -116,6 +146,31 @@
                     </div>
                 </div>
             </div>
+            @include('frontend.pages.product_detail.include._inc_ratings')
+            <div class="review_list">
+            @include('frontend.pages.product_detail.include._inc_list_reviews')
+            </div>
+                <div class="comments" style="margin-top: 20px">
+                    <div class="form-comment">
+                        <form action="{{route('get_ajax_comment')}}" method="POST" id="form-comments">
+                            @csrf
+                            <input type="hidden" name="productId" value="{{ $product->id }}">
+                            <div class="form-group">
+                                <textarea placeholder="Mời bạn để lại bình luận ..." name="comment" class="form-control" id="" cols="30" rows="5"></textarea>
+                            </div>
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <div class="footer">
+                                <p>
+                                    <a href=""><i class="la la-camera"></i> Gửi ảnh</a>
+                                    <a href="">Quy định đăng bình luận</a>
+                                </p>
+                                <button class=" {{ \Auth::id() ? 'js-save-comment' : 'js-show-login' }}">Gửi bình luận</button>
+                            </div>
+                        </form>
+                    </div>
+                @include('frontend.pages.product_detail.include._inc_list_comment')
+                </div>
+            
             <div class="card-body product-des">
                 <div class="left">
                     <div class="tabs">
@@ -141,4 +196,200 @@
 @stop
 @section('script')
     <script src="{{ mix('js/product_detail.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $(".js-add-favorite").click(function(event){
+            event.preventDefault();
+            let $this = $(this);
+            let URL = $this.attr('href');
+            //alert(URL);
+            $.ajax({
+                headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                method:"POST",
+                url: URL,
+            }).done(function(results){
+                alert(results.messages);
+            });
+            //console.log(URL);
+        });
+
+   
+
+        $(".js-review").click(function (event){
+            event.preventDefault();
+            let $this = $(this);
+            if($this.hasClass('js-check-login')){
+                toarstr.warning('Đăng  nhập để thực hiện chức năng này');
+                return false;
+            }
+            if($this.hasClass('active')){
+                $this.text('Gửi đánh giá').addClass('btn-success').removeClass('btn-default active')}
+            else{
+                $this.text('Đóng lại').addClass('btn-default active').removeClass('btn-success')}
+            $('#block-review').slideToggle();      
+        })
+        // hover icon thay doi so sao danh gia
+        let $item = $('#ratings i');
+        let arrTextRating = {
+            1 : "Không thích",
+            2 : "Tạm được",
+            3 : "Bình thường",
+            4 : "Rất tốt",
+            5 : "Tuyệt vời"
+        }
+       // alert(1);
+        $item.mouseover(function(){
+            let $this = $(this);
+            let $i = $this.attr('data-i');
+
+            $('#review_value').val($i);
+            $item.removeClass('active');
+            $item.each(function(key, value){
+                if(key + 1 <= $i){
+                    $(this).addClass('active')
+                }
+            })
+            $('#reviews-text').text(arrTextRating[$i]);
+        })
+
+        $('.js-process-review').click(function(even){
+            even.preventDefault();
+            let URL = $(this).parents('form').attr('action');
+            //alert(URL);
+            $.ajax({
+                headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                method:"POST",
+                url: URL,
+                data: $('#form-review').serialize(),
+            }).done(function(results){
+                 $('#form-review')[0].reset();
+                 $( ".js-review" ).trigger( "click" );
+                 //console.log(results.html);
+                 if(results.html){
+                    $('.review_list .item').last().remove();
+                    $('.review_list').prepend(results.html);
+                 }
+                alert(results.messages);
+            });
+        })
+        $('.js-save-comment').click(function(even){
+            even.preventDefault();
+            //alert(2222);
+            let $this = $(this);
+            let URL = $(this).parents('form').attr('action');
+            let comment = $this.parents('form').find("textarea").val();
+            if (!comment.length) {
+                //toast.warning('Nội dung comments không được để trống!');
+                alert('Nội dung comments không được để trống!');
+                return false;
+            }
+            //alert(URL);
+            $.ajax({
+                headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                method:"POST",
+                url: URL,
+                data: $('#form-comments').serialize(),
+            }).done(function(results){
+                $('#form-comments')[0].reset();
+                alert(results.messages);
+                if(results.html){
+                    $('#list-comment .item').last().remove();
+                    $('#list-comment').prepend(results.html);
+                 }
+            });
+        })
+        let _this = this;
+        //alert(_this);
+        $("body").on("click",".js-show-form-reply", function (event) {
+            event.preventDefault();
+            //alert('1');
+            let $this = $(this);
+            $(".lists .form-comment").remove();
+            let commentID = $this.attr('data-id');
+            let productID = $this.attr('data-product');
+            //let route = 'frontend/user/ajax_rep_comment';
+            let name = $this.attr('data-name');
+            let html = `<div class="form-comment">
+                    <form action="{{route('get_ajax_rep_comment')}}" method="POST" id="rep_comment">
+                    <input type="hidden" name="productId" value="${productID}">
+                    <input type="hidden" name="commentId" value="${commentID}">
+                        <div class="form-group">
+                            <textarea name="comment" class="form-control" id="" cols="30" rows="5">@${name}: </textarea>
+                        </div>
+                        <div class="footer">
+                            <p>
+                                <a href=""><i class="la la-camera"></i> Gửi ảnh</a>
+                                <a href="">Quy định đăng bình luận</a>
+                            </p>
+                            <button class="js-reply-comment" data-reply="">Gửi bình luận</button>
+                        </div>
+                    </form>
+                </div>`;
+            let $item = $this.parentsUntil('.item');
+            //alert($item);
+            if ($this.parents('.comments-reply').length)
+            {
+                //console.log("list");
+                // $this.parents('.comments-reply').css('border','1px solid red');
+                //alert($item.parents('.comments-reply'));
+                $item.parents('.comments-reply').after(html)
+            }else {
+                $item.append(html);
+            };
+
+            $('.js-reply-comment').click(function(even){
+                even.preventDefault();
+                let $this = $(this);
+                let URL = $(this).parents('form').attr('action');
+                //alert(URL);
+                let comment = $this.parents('form').find("textarea").val();
+                if (!comment.length) {
+                    //toast.warning('Nội dung comments không được để trống!');
+                    alert('Nội dung comments không được để trống!');
+                    return false;
+                }
+                //let $item = $this.parentsUntil('.item');
+                
+                $.ajax({
+                    headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                    method:"POST",
+                    url: URL,
+                    data: $('#rep_comment').serialize(),
+                }).done(function(results){
+                    $('#rep_comment')[0].reset();
+                    //$('#form-review')[0].reset();
+                    $( ".js-show-form-reply" ).trigger( "click" );
+                    //alert(123);
+                    // if(results.html){
+                    //     //$('#list-comment .item').last().remove();
+                    //     $('.item .comments-reply').prepend(results.html);
+                    //  }
+                    if ($this.parents('.comments-reply').length)
+                        {
+                            //console.log("list");
+                            // $this.parents('.comments-reply').css('border','1px solid red');
+                            //alert($item.parents('.comments-reply'));
+                            $item.parents('.comments-reply').after(results.html)
+                        }else {
+                            $item.append(results.html);
+                        };
+                });
+        })
+           
+
+        })
+        
+        
+    });
+   
+    </script>
 @stop
