@@ -31,10 +31,23 @@ class RegisterController extends Controller
     	$data = ['email'=>$Request->email,'password'=>$Request->password];
     	
     	if(Auth::attempt($data)){
+             $this->logLogin();
     		return redirect()->route('frontend.home.index');
     	}
     	else
     		return redirect()->route('frontend.account.login.index')->with('thongbao','Tài khoản hoặc mật khẩu không đúng!');
+    }
+    private function logLogin()
+    {
+        $log = get_agent();
+        $historyLog = \Auth::user()->log_login;
+        $historyLog = json_decode($historyLog,true) ?? [];
+        $historyLog[] = $log;
+        \DB::table('users')->where('id', \Auth::user()->id)
+            ->update([
+                'log_login' => json_encode($historyLog)
+            ]);
+        //Log::info($historyLog);
     }
     public function logout(){
     	Auth::logout();

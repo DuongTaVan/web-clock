@@ -3,36 +3,33 @@
         <div class="footer__left">
             <div class="top">
                 @for($i = 0; $i < 3; $i++)
+                
                     <div class="item">
                         <div class="title">THÔNG TIN CHUNG</div>
                         <ul>
+                            @foreach($menus as $menu)
                             <li>
-                                <a href="tin-tuc/226/Dang-Quang-Watch-nha-nhap-khau-dong-ho-chinh-hang-Thuy-Sy.html" title="Giới thiệu">Giới thiệu chung</a>
+                                <a href="{{route('frontend.blog.index')}}" title="{{$menu->mn_slug}}">{{$menu->mn_name}}</a>
                             </li>
-                            <li>
-                                <a href="https://www.facebook.com/tuyendungdangquang/" title="Tuyển dụng">Kênh tuyển dụng</a>
-                            </li>
-                            <li><a href="tin-tuc-dong-ho.html" title="Tin tức">Tin tức - Sự kiện</a></li>
-                            <li><a href="he-thong-cua-hang/index.html" title="Cửa hàng">Hệ thống cửa hàng</a></li>
-                            <li>
-                                <a href="https://www.facebook.com/groups/269522113844965/" title="">Cộng đồng khách hàng</a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
+                
                 @endfor
             </div>
+            
             <div class="bot">
                 <div class="social">
                     <div class="title">KẾT NỐI VỚI CHÚNG TÔI</div>
                     <ul>
                         <li>
-                            <a href="https://www.facebook.com/donghodangquang/" title=""><i class="fa fa-search"></i></a>
+                        <a href="https://www.facebook.com/dth999/" title=""><i class="fab fa-facebook-f"></i></a>
                         </li>
-                        <li><a href="javascript://" title=""><i class="fa fa-search"></i></a></li>
-                        <li><a href="https://www.youtube.com/dangquangtv" title=""><i class="fa fa-search"></i></a>
+                        <li><a href="https://www.facebook.com/dth999/" title=""><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UC03-WUILrQWC7j1a4o9Dg9g?view_as=subscriber" title=""><i class="fab fa-youtube"></i></a>
                         </li>
-                        <li><a href="javascript://" title=""><i class="fa fa-search"></i></a></li>
-                        <li><a href="javascript://" title=""><i class="fa fa-search"></i></a></li>
+                        <li><a href="https://www.facebook.com/dth999/" title=""><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="https://www.facebook.com/dth999/" title=""><i class="fab fa-google-plus-g"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -40,12 +37,12 @@
         <div class="footer__mid">
             <div class="title">Hệ thống cửa hàng</div>
             <div class="image">
-                <a href="he-thong-cua-hang/index.html" title="Hệ thống cửa hàng" class="image cover">
-                    <img data-src="" class="lazyload" alt="Dang Quang Watch" src="{{ url('images/banner/dongho.jpg') }}" />
+                <a href="https://www.facebook.com/dth999/" title="Hệ thống cửa hàng" class="image cover">
+                    <img data-src="" class="lazyload" alt="Dang Quang Watch" src="{{ url('images/event/cua-hang-dang-quang.jpg') }}" />
                 </a>
                 <p class="search-location">Tìm ngay cửa hàng gần bạn</p>
             </div>
-            <a href="he-thong-cua-hang/index.html" title="" class="more">Xem tất cả hệ thống cửa hàng</a>
+            <a href="https://www.facebook.com/dth999/" title="" class="more">Xem tất cả hệ thống cửa hàng</a>
         </div>
         <div class="footer__right">
             <div class="title">Fanpage của chúng tôi</div>
@@ -56,7 +53,7 @@
 </div>
 <div id="bottom">
     <div class="wrapper">
-        <a href="index.html" title="" class="logo">
+        <a href="{{route('frontend.home.index')}}" title="" class="logo">
             <img data-src="" class="lazyload" alt="Dang Quang Watch" src="{{ url('view/Css/icon/Logo.png') }}" />
         </a>
         <div class="right">

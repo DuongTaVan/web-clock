@@ -71,7 +71,7 @@
                                     <span>Mua ngay</span>
                                     <span>Hotline: 1800.6005</span>
                                 </a>
-                                <a href="{{route('ajax_get.user.add_favorite',$product->id)}}" title="Thêm sản phẩm yêu thích" class="muatragop js-add-favorite">
+                                <a href="{{route('ajax_get.user.add_favorite',$product->id)}}" title="Thêm sản phẩm yêu thích" class="muatragop {{ \Auth::id() ? 'js-add-favorite' : 'js-show-login' }}">
                                     <span>Sản phẩm</span>
                                     <span>Yêu thích</span>
                                 </a>
@@ -211,9 +211,10 @@
                 method:"POST",
                 url: URL,
             }).done(function(results){
-                alert(results.messages);
+                
+                toastr.info(results.messages);
             });
-            //console.log(URL);
+       
         });
 
    
@@ -274,7 +275,7 @@
                     $('.review_list .item').last().remove();
                     $('.review_list').prepend(results.html);
                  }
-                alert(results.messages);
+                toastr.info(results.messages);
             });
         })
         $('.js-save-comment').click(function(even){
@@ -284,8 +285,8 @@
             let URL = $(this).parents('form').attr('action');
             let comment = $this.parents('form').find("textarea").val();
             if (!comment.length) {
-                //toast.warning('Nội dung comments không được để trống!');
-                alert('Nội dung comments không được để trống!');
+                toast.warning('Nội dung comments không được để trống!');
+                //alert('Nội dung comments không được để trống!');
                 return false;
             }
             //alert(URL);
@@ -298,7 +299,7 @@
                 data: $('#form-comments').serialize(),
             }).done(function(results){
                 $('#form-comments')[0].reset();
-                alert(results.messages);
+                toastr.info(results.messages);
                 if(results.html){
                     $('#list-comment .item').last().remove();
                     $('#list-comment').prepend(results.html);
@@ -352,7 +353,7 @@
                 let comment = $this.parents('form').find("textarea").val();
                 if (!comment.length) {
                     //toast.warning('Nội dung comments không được để trống!');
-                    alert('Nội dung comments không được để trống!');
+                    toastr.warning('Nội dung không được để trống!');
                     return false;
                 }
                 //let $item = $this.parentsUntil('.item');

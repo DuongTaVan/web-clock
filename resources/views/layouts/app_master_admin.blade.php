@@ -384,8 +384,8 @@
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="{{route('admin.statistical.index')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Statistical</span></a></li>
-        <li><a href="{{route('admin.trademark.index')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Trademark</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        <li><a href="{{route('admin.trademark.index')}}"><i class="fa fa-circle-o text-teal"></i> <span>Trademark</span></a></li>
+        <li><a href="{{route('admin.event.index')}}"><i class="fa fa-circle-o text-aqua"></i> <span>Event</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

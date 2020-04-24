@@ -22,21 +22,21 @@
                     <div class="col-sm-3">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="a_position_1" value="1">  Trung tâm
+                                <input type="checkbox" name="a_position_1" value="1" {{$article->a_position_1 ?? 0 == 1 ? "checked" :""}}>  Trung tâm
                             </label>
                          </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="a_position_2" value="1">  Sidebar
+                                <input type="checkbox" name="a_position_2" value="1" {{$article->a_position_2 ?? 0 == 1 ? "checked" :""}}>  Sidebar
                             </label>
                          </div>
                     </div>
                 </div>
                 <div class="form-group "> 
                     <label for="exampleInputEmail1">Description</label> 
-                    <textarea id="content" name="a_description" class="form-control" cols="5" rows="2" autocomplete="off" value="{{$article->a_description??""}}"></textarea> 
+                    <textarea id="content" name="a_description" class="form-control" cols="5" rows="2" autocomplete="off" >{{$article->a_description??""}}</textarea> 
                     @if ($errors->first('a_description'))
                         <span class="text-danger">{{ $errors->first('a_description') }}</span>
                     @endif
@@ -64,13 +64,15 @@
                 <h3 class="box-title">Nội dung</h3>
             </div>
             <div class="box-body">
-                <div class="form-group ">
+              
+                <div class="form-group "> 
                     <label for="exampleInputEmail1">Content</label> 
-                    <textarea name="a_content" id="content" class="form-control textarea" cols="5" rows="2" {{$article->a_content??""}} ></textarea>
+                    <textarea id="content" name="a_content" class="form-control" cols="5" rows="2"  autocomplete="off"  >{{$article->a_content??""}}</textarea> 
                     @if ($errors->first('a_content'))
                         <span class="text-danger"></span>
                     @endif
                 </div>
+
             </div>
         </div>
     </div>

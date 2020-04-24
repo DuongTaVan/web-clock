@@ -7,18 +7,22 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\{Transactions};
 
+
 class DashboardController extends Controller
 {
     public function index(){
-    	return view('user.dashboard');
+        
+        //dd($platform);
+        return view('user.dashboard');
+
     }
     public function edit(){
-    	return view('user.update_infor');
+        return view('user.update_infor');
     }
     public function update(Request $request, $id){
-    	$user = User::find($id)->firstOrFail();
-    	$user->update($request->all());
-    	return redirect()->back();
+        $user = User::find($id)->firstOrFail();
+        $user->update($request->all());
+        return redirect()->back();
     }
    
     public function transaction(Request $request){
@@ -35,11 +39,11 @@ class DashboardController extends Controller
         }
         if($status = $request->status)
             $transaction->where('tst_status',$status);
-    	$transaction = $transaction->orderByDesc('id')->paginate(10);
+        $transaction = $transaction->orderByDesc('id')->paginate(10);
         if($request->export){
             return \Excel::download(new TransactionExport($transaction), Str::random(40).'don-hang.xlsx');
         }
         $query = $request->query();
-    	return view('user.transaction', compact('transaction','query'));
+        return view('user.transaction', compact('transaction','query'));
     }
 }

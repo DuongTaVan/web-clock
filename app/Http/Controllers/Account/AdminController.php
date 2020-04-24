@@ -18,7 +18,9 @@ class AdminController extends Controller
     {
         if (\Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
 //            return redirect()->intended('/api-admin');
+           
             return redirect()->route('admin.category.create');
+
         }
 
         return redirect()->back();
@@ -27,7 +29,9 @@ class AdminController extends Controller
     public function getLogoutAdmin()
     {
         \Auth::guard('admin')->logout();
+        
         return redirect()->route('admin.account.index');
+      
     }
 }
 

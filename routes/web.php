@@ -187,6 +187,18 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('hot/{id}','Admin\AdminTrademarkController@hot')->name('admin.trademark.hot');
         Route::get('delete/{id}','Admin\AdminTrademarkController@delete')->name('admin.trademark.delete');
     });
+
+    Route::group(['prefix' => 'event'], function(){
+        Route::get('','Admin\AdminEventController@index')->name('admin.event.index');
+        Route::get('create','Admin\AdminEventController@create')->name('admin.event.create');
+        Route::post('createe','Admin\AdminEventController@store');
+
+        Route::get('update/{id}','Admin\AdminEventController@edit')->name('admin.event.update');
+        Route::post('update/{id}','Admin\AdminEventController@update');
+        
+        Route::get('hot/{id}','Admin\AdminEventController@hot')->name('admin.event.hot');
+        Route::get('delete/{id}','Admin\AdminEventController@delete')->name('admin.event.delete');
+    });
     
 });
 
@@ -195,11 +207,13 @@ Route::group(['prefix'=>'frontend'], function(){
     
     Route::get('home','Frontend\FrontendHomeController@index')->name('frontend.home.index');
     Route::get('san-pham','Frontend\FrontendProductController@index')->name('frontend.product.index');
+    Route::get('danh-muc-san-pham/{slug}','Frontend\FrontendProductController@productCate')->name('frontend.product.category');
+    Route::get('danh-muc-san-pham-search/{slug}','Frontend\FrontendProductController@productCateSearch')->name('frontend.product.cate_search');
     Route::get('san-pham/{slug}','Frontend\FrontendDetailController@index')->name('frontend.detail.index');
     Route::get('san-pham/{slug}/danh-gia','Frontend\FrontendDetailController@getRating')->name('frontend.detail.rating');
     Route::get('bai-viet','Frontend\BlogController@index')->name('frontend.blog.index');
     Route::get('bai-viet/{slug}','Frontend\ArticleDetailController@index')->name('frontend.blog_detail.index');
-    Route::get('thuong-hieu/{slug}','Frontend\FrontendTrademarkController@index')->name('frontend.blog_detail.index');
+    Route::get('thuong-hieu/{slug}','Frontend\FrontendTrademarkController@index')->name('frontend.thuong-hieu.index');
     Route::group(['prefix'=>'account'], function(){
     
         Route::get('register','Account\RegisterController@index')->name('frontend.account.register.index');

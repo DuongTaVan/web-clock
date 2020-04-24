@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.0",
         "maatwebsite/excel": "^3.1",
         "rap2hpoutre/laravel-log-viewer": "^1.4",
-        "unisharp/laravel-filemanager": "^2.0"
+        "unisharp/laravel-filemanager": "^2.0",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

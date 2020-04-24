@@ -1,46 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>{{ strtolower($title_page ?? "Đồ án tốt nghiệp")   }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" sizes="32x32" type="image/png" href="{{ asset('ico.png') }}" />
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    @yield('css')
 
-<!doctype html>
-<html lang="en">
-
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-    <meta charset="utf-8">
-    <title>Pipeline Project Management Bootstrap Theme</title>
-    <base href="{{asset('')}}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A project management Bootstrap theme by Medium Rare">
-    <link href="assets/img/favicon.ico" rel="icon" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
-    <link href="user/theme.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- Latest compiled and minified CSS -->
-  </head>
-
-  <body>
-
-    <div class="layout layout-nav-side">
-      <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
-
-        <a class="navbar-brand" href="index.html">
-          <img alt="Pipeline" src="assets/img/logo.svg" />
-        </a>
-        <div class="d-flex align-items-center">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="d-block d-lg-none ml-2">
-            <div class="dropdown">
-              <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar" />
-              </a>
-              <div class="dropdown-menu dropdown-menu-right">
-                <a href="nav-side-user.html" class="dropdown-item">Profile</a>
-                <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
-                <a href="#" class="dropdown-item">Log Out</a>
-              </div>
-            </div>
-          </div>
+    {{-- Thông báo --}}
+    @if(session('toastr'))
+        <script>
+      var TYPE_MESSAGE = "{{session('toastr.type')}}";
+      var MESSAGE = "{{session('toastr.message')}}";
+        </script>
+    @endif
+    <style type="text/css">
+       #headers {
+            background: #2196f3 !important;
+           
+        }
+        #headers .search form {
+            background: #fbfbfb !important;
+            border: 1px solid #ffffff !important;
+        }
+        #headers .search form .btnSearch {
+        background: #2196f3 !important;
+        border-left: 1px solid #2196f3 !important;
+       }
+       #menu-main .menu-left .title {
+        background: #4ca8f1 !important;
+        }
+        #menu-main .menu-right .right a:last-child {
+        background: #4da4e8 !important;}
+        #footer {
+        background-image: linear-gradient(#232f3e,#384351) !important;}
+        #bottom {
+        background: #17232d !important;
+        }
+        #headers .search form{
+          margin-left: 15px !important;
+        }
+    </style>
+</head>
+<body>
+@include('frontend/components.header')
+<div class="container user">
+    <div class="left">
+        <div class="header">
+            <img src="{{ pare_url_file(Auth::user()->avatar) }}" alt="">
+            <p>
+                <span>Tài khoản của</span>
+                <span>{{Auth::user()->name}}</span>
+            </p>
+        </div>
+        <p>Đăng nhập lần cuối <b>{{ get_time_login(Auth::user()->log_login)['time'] ?? "" }}</b></p>
+        <div class="content">
+            <ul class="left-nav">
+              @if(isset($snvfy)))
+                @foreach(config('user') as $item)
+                    <li>
+                        <a href="{{ route($item['route']) }}" class="{{ \Request::route()->getName() == $item['route'] ? 'active' : '' }}">
+                            <i class="{{ $item['icon'] }}"></i>
+                            <span>{{ $item['name'] }}</span>
+                        </a>
+                    </li>
+                @endforeach
+                @endif
+            </ul>
         </div>
         <div class="collapse navbar-collapse flex-column" id="navbar-collapse">
                     <ul class="navbar-nav d-lg-block">
@@ -54,91 +83,25 @@
                             <a class="nav-link" href="{{route('frontend.account.transaction')}}">Quản lý đơn hàng</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Sản phẩm yêu thích</a>
+                            <a class="nav-link" href="{{route('frontend.account.favorite')}}">Sản phẩm yêu thích</a>
                         </li>
 
                     </ul>
                     <hr>
                 </div>
-        <div class="d-none d-lg-block">
-          <div class="dropup">
-            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar" />
-            </a>
-            <div class="dropdown-menu">
-              <a href="nav-side-user.html" class="dropdown-item">Profile</a>
-              <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
-              <a href="#" class="dropdown-item">Log Out</a>
-            </div>
-          </div>
-        </div>
 
-      </div>
-      <div class="main-container">
-
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-12 col-xl-12">
-                @yield('content')
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
-
-    <!-- Required vendor scripts (Do not remove) -->
-    <script type="text/javascript" src="user/js/jquery.min.js"></script>
-    <script type="text/javascript" src="user/js/popper.min.js"></script>
-    <script type="text/javascript" src="user/js/bootstrap.js"></script>
-
-    <!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
-
-    <!-- Autosize - resizes textarea inputs as user types -->
-    <script type="text/javascript" src="user/js/autosize.min.js"></script>
-    <!-- Flatpickr (calendar/date/time picker UI) -->
-    <script type="text/javascript" src="user/js/flatpickr.min.js"></script>
-    <!-- Prism - displays formatted code boxes -->
-    <script type="text/javascript" src="user/js/prism.js"></script>
-    <!-- Shopify Draggable - drag, drop and sort items on page -->
-    <script type="text/javascript" src="user/js/draggable.bundle.legacy.js"></script>
-    <script type="text/javascript" src="user/js/swap-animation.js"></script>
-    <!-- Dropzone - drag and drop files onto the page for uploading -->
-    <script type="text/javascript" src="user/js/dropzone.min.js"></script>
-    <!-- List.js - filter list elements -->
-    <script type="text/javascript" src="user/js/list.min.js"></script>
-
-    <!-- Required theme scripts (Do not remove) -->
-    <script type="text/javascript" src="user/js/theme.js"></script>
-
-    <!-- This appears in the demo only - demonstrates different layouts -->
-    <style type="text/css">
-      .layout-switcher{ position: fixed; bottom: 0; left: 50%; transform: translateX(-50%) translateY(73px); color: #fff; transition: all .35s ease; background: #343a40; border-radius: .25rem .25rem 0 0; padding: .75rem; z-index: 999; }
-            .layout-switcher:not(:hover){ opacity: .95; }
-            .layout-switcher:not(:focus){ cursor: pointer; }
-            .layout-switcher-head{ font-size: .75rem; font-weight: 600; text-transform: uppercase; }
-            .layout-switcher-head i{ font-size: 1.25rem; transition: all .35s ease; }
-            .layout-switcher-body{ transition: all .55s ease; opacity: 0; padding-top: .75rem; transform: translateY(24px); text-align: center; }
-            .layout-switcher:focus{ opacity: 1; outline: none; transform: translateX(-50%) translateY(0); }
-            .layout-switcher:focus .layout-switcher-head i{ transform: rotateZ(180deg); opacity: 0; }
-            .layout-switcher:focus .layout-switcher-body{ opacity: 1; transform: translateY(0); }
-            .layout-switcher-option{ width: 72px; padding: .25rem; border: 2px solid rgba(255,255,255,0); display: inline-block; border-radius: 4px; transition: all .35s ease; }
-            .layout-switcher-option.active{ border-color: #007bff; }
-            .layout-switcher-icon{ width: 100%; border-radius: 4px; }
-            .layout-switcher-body:hover .layout-switcher-option:not(:hover){ opacity: .5; transform: scale(0.9); }
-            @media all and (max-width: 990px){ .layout-switcher{ min-width: 250px; } }
-            @media all and (max-width: 767px){ .layout-switcher{ display: none; } }
-    </style>
-    <div class="layout-switcher" tabindex="1">
-      <div class="layout-switcher-head d-flex justify-content-between">
-        <span>Select Layout</span>
-        <i class="material-icons">arrow_drop_up</i>
-      </div>
-      <div class="layout-switcher-body">
-
-      </div>
+    <div class="right">
+        @yield('content')
     </div>
+    <div class="" style="clear: both"></div>
+</div>
+@include('frontend.components.footer')
+<script>
+  var DEVICE = '{{  device_agent() }}'
+</script>
+<script src="{{ asset('js/cart.js') }}" type="text/javascript"></script>
 
-  </body>
-
+@yield('script')
+</body>
 </html>

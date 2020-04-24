@@ -14,6 +14,39 @@
     @endif
      <link rel="stylesheet" type="text/css" href="https://codeseven.github.io/toastr/build/toastr.min.css">
      <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+     <style type="text/css">
+        .rating i.active{
+            color: #faca51;
+        }
+        .rating i.no_active{
+            color: #e8e8e8;
+        }
+        #headers {
+            background: #2196f3 !important;
+           
+        }
+        #headers .search form {
+            background: #fbfbfb !important;
+            border: 1px solid #ffffff !important;
+        }
+        #headers .search form .btnSearch {
+        background: #2196f3 !important;
+        border-left: 1px solid #2196f3 !important;
+       }
+       #menu-main .menu-left .title {
+        background: #4ca8f1 !important;
+        }
+        #menu-main .menu-right .right a:last-child {
+        background: #4da4e8 !important;}
+        #footer {
+        background-image: linear-gradient(#232f3e,#384351) !important;}
+        #bottom {
+        background: #17232d !important;
+        }
+        #footer .footer__left .bot .social ul li a:hover{color: #fff !important;}
+    </style>
+    
+    @toastr_css
          
     @yield('css')
     {{-- Thông báo --}}
@@ -36,22 +69,13 @@
 @yield('content')
 @include('frontend/components.footer')
 @yield('script')
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://codeseven.github.io/toastr/build/toastr.min.js"></script>
+
+
 <script>
     var DEVICE = '{{ device_agent() }}';
 </script>
 <script type="text/javascript">
-    if(typeof TYPE_MESSAGE != "undefined"){
-        switch (TYPE_MESSAGE){
-            case 'success':
-                toastr.success(MESSAGE)
-                break;
-            case 'error':
-            toastr.error(MESSAGE)
-            break;
-        }
-    }
+    
     $('.js-show-login').click(function(){
         console.log('a');
         event.preventDefault();
@@ -60,6 +84,8 @@
     })
 </script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
-
+    @jquery
+    @toastr_js
+    @toastr_render
 </body>
 </html>
