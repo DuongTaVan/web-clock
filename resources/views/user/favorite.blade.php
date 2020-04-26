@@ -1,4 +1,9 @@
 @extends('layouts.app_master_user')
+@section('css')
+    <style>
+        <?php $style = file_get_contents('css/user.min.css');echo $style;?>
+    </style>
+@stop
 @section('content')
     <section>
         <div class="title">Danh sách sản phẩm yêu thích</div>
@@ -35,7 +40,7 @@
                             
                             <th>
                                 <a  href="san-pham/{{$pr->id}}"  class="avatar image contain">
-                                    <img height="120px" width="70px" alt="" src="{{pare_url_file($pr->pro_avatar)}}" class="lazyload">
+                                    <img style="height: 20% !important;" src="{{pare_url_file($pr->pro_avatar)}}">
                                 </a>
                             </th>
                             <th> 

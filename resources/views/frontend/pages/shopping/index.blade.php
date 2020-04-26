@@ -55,7 +55,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @if(\Cart::count()!=0)
                     <p style="float: right;margin-top: 20px;">Tổng tiền : <b id="sub-total">{{ \Cart::subtotal(0) }} đ</b></p>
+                    @else 
+                    <p>Không có sản phẩm trong giỏ hàng</p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -113,7 +117,8 @@
               url: url,
             })
               .done(function(results) {
-                alert(results.messages);
+                //alert(results.messages);
+                toastr.warning(results.messages);
                 location.reload();
               });
 

@@ -9,6 +9,7 @@ class FrontendArticleController extends Controller
 {
     public function index(){
     	return view('frontend.pages.article_detail.index');
+    	dd(1);
     }
     public function Login(){
     	dd(1);

@@ -50,12 +50,12 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         //create user
         Route::get('create','RolePermission\RoleController@create')->name('role.add')->middleware('checkAcl:role-add');;
         Route::post('create','RolePermission\RoleController@store')->name('role.postadd')->middleware('checkAcl:role-add');;
-        Route::get('edit/{id}','RolePermission\RoleController@edit')->name('role.edit')->middleware('checkAcl:role-edit');;
+        Route::get('edit/{id}','RolePermission\RoleController@edit')->name('role.edit')->middleware('checkAcl:role-edit');
         Route::post('postedit/{id}','RolePermission\RoleController@postedit')->name('role.postedit')->middleware('checkAcl:role-edit');;
-        Route::get('delete/{id}','RolePermission\RoleController@delete')->name('role.delete')->middleware('checkAcl:role-delete');;
+        Route::get('delete/{id}','RolePermission\RoleController@delete')->name('role.delete')->middleware('checkAcl:role-delete')->middleware('checkAcl:role-delete');
     });
     //Permission
-    Route::group(['prefix'=>'permission'],function(){
+    Route::group(['prefix'=>'permission','middleware'=>'checkAcl:permission'],function(){
         //list user
         Route::get('','RolePermission\PermissionController@getIndex')->name('permission.list');
         //create user
@@ -70,7 +70,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
 
 
 
-	Route::group(['prefix' => 'category'], function(){
+	Route::group(['prefix' => 'category','middleware'=>'checkAcl:category'], function(){
         Route::get('','Admin\AdminCategoryController@index')->name('admin.category.index');
         Route::get('create','Admin\AdminCategoryController@create')->name('admin.category.create');
         Route::post('createe','Admin\AdminCategoryController@store');
@@ -82,11 +82,14 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('hot/{id}','Admin\AdminCategoryController@hot')->name('admin.category.hot');
         Route::get('delete/{id}','Admin\AdminCategoryController@delete')->name('admin.category.delete');
     });
-    Route::group(['prefix'=>'statistical'], function(){
+    Route::group(['prefix'=>'statistical','middleware'=>'checkAcl:statistical'], function(){
         Route::get('','Admin\AdminStatisticalController@index')->name('admin.statistical.index');
     });
+    Route::group(['prefix'=>'warehouse','middleware'=>'checkAcl:statistical'], function(){
+        Route::get('','Admin\AdminWareHouseController@index')->name('admin.warehouse.index');
+    });
 
-    Route::group(['prefix' => 'menu'], function(){
+    Route::group(['prefix' => 'menu','middleware'=>'checkAcl:menu'], function(){
         Route::get('','Admin\AdminMenuController@index')->name('admin.menu.index');
         Route::get('create','Admin\AdminMenuController@create')->name('admin.menu.create');
         Route::post('createe','Admin\AdminMenuController@store');
@@ -99,7 +102,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('delete/{id}','Admin\AdminMenuController@delete')->name('admin.menu.delete');
     });
 
-    Route::group(['prefix' => 'article'], function(){
+    Route::group(['prefix' => 'article','middleware'=>'checkAcl:write-blog'], function(){
         Route::get('','Admin\AdminArticleController@index')->name('admin.article.index');
         Route::get('create','Admin\AdminArticleController@create')->name('admin.article.create');
         Route::post('create','Admin\AdminArticleController@store');
@@ -112,7 +115,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('delete/{id}','Admin\AdminArticleController@delete')->name('admin.article.delete');
     });
 
-    Route::group(['prefix' => 'keyword'], function(){
+    Route::group(['prefix' => 'keyword','middleware'=>'checkAcl:key'], function(){
         Route::get('','Admin\AdminKeywordController@index')->name('admin.keyword.index');
         Route::get('create','Admin\AdminKeywordController@create')->name('admin.keyword.create');
         Route::post('createe','Admin\AdminKeywordController@store');
@@ -124,7 +127,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('delete/{id}','Admin\AdminKeywordController@delete')->name('admin.keyword.delete');
     });
 
-    Route::group(['prefix' => 'transaction'], function(){
+    Route::group(['prefix' => 'transaction','middleware'=>'checkAcl:transport'], function(){
         Route::get('','Admin\AdminTransactionController@index')->name('admin.transaction.index')->middleware('checkAcl:transport');
         Route::get('delete/{id}','Admin\AdminTransactionController@delete')->name('admin.transaction.delete')->middleware('checkAcl:transport');
         Route::get('view-transaction/{id}','Admin\AdminTransactionController@getTransactionDetail')->name('ajax.admin.transaction.detail')->middleware('checkAcl:transport');
@@ -133,7 +136,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
     });
 
 
-    Route::group(['prefix' => 'product'], function(){
+    Route::group(['prefix' => 'product','middleware'=>'checkAcl:product'], function(){
         Route::get('','Admin\AdminProductController@index')->name('admin.product.index');
         Route::get('create','Admin\AdminProductController@create')->name('admin.product.create');
         Route::post('create','Admin\AdminProductController@store');
@@ -148,7 +151,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         
     });
 
-    Route::group(['prefix' => 'attribute'], function(){
+    Route::group(['prefix' => 'attribute','middleware'=>'checkAcl:attribute'], function(){
         Route::get('','Admin\AdminAttributeController@index')->name('admin.attribute.index');
         Route::get('create','Admin\AdminAttributeController@create')->name('admin.attribute.create');
         Route::post('createe','Admin\AdminAttributeController@store');
@@ -160,7 +163,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('delete/{id}','Admin\AdminAttributeController@delete')->name('admin.attribute.delete');
     });
 
-    Route::group(['prefix' => 'user'], function(){
+    Route::group(['prefix' => 'user','middleware'=>'checkAcl:user'], function(){
         Route::get('','Admin\AdminUserController@index')->name('admin.user.index');
         Route::get('create','Admin\AdminUserController@create')->name('admin.user.create');
         Route::post('createe','Admin\AdminUserController@store');
@@ -171,12 +174,12 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         
         Route::get('delete/{id}','Admin\AdminUserController@delete')->name('admin.user.delete');
     });
-    Route::group(['prefix' => 'rating'], function(){
+    Route::group(['prefix' => 'rating','middleware'=>'checkAcl:rating'], function(){
         Route::get('','Admin\RatingController@index')->name('admin.rating.index');
         Route::get('delete/{id}','Admin\RatingController@delete')->name('admin.rating.delete');
     });
 
-    Route::group(['prefix' => 'trademark'], function(){
+    Route::group(['prefix' => 'trademark','middleware'=>'checkAcl:trademark'], function(){
         Route::get('','Admin\AdminTrademarkController@index')->name('admin.trademark.index');
         Route::get('create','Admin\AdminTrademarkController@create')->name('admin.trademark.create');
         Route::post('createe','Admin\AdminTrademarkController@store');
@@ -187,6 +190,18 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
         Route::get('hot/{id}','Admin\AdminTrademarkController@hot')->name('admin.trademark.hot');
         Route::get('delete/{id}','Admin\AdminTrademarkController@delete')->name('admin.trademark.delete');
     });
+
+    Route::group(['prefix' => 'event','trademark','middleware'=>'checkAcl:event'], function(){
+        Route::get('','Admin\AdminEventController@index')->name('admin.event.index');
+        Route::get('create','Admin\AdminEventController@create')->name('admin.event.create');
+        Route::post('createe','Admin\AdminEventController@store');
+
+        Route::get('update/{id}','Admin\AdminEventController@edit')->name('admin.event.update');
+        Route::post('update/{id}','Admin\AdminEventController@update');
+        
+        Route::get('hot/{id}','Admin\AdminEventController@hot')->name('admin.event.hot');
+        Route::get('delete/{id}','Admin\AdminEventController@delete')->name('admin.event.delete');
+    });
     
 });
 
@@ -195,11 +210,13 @@ Route::group(['prefix'=>'frontend'], function(){
     
     Route::get('home','Frontend\FrontendHomeController@index')->name('frontend.home.index');
     Route::get('san-pham','Frontend\FrontendProductController@index')->name('frontend.product.index');
-    Route::get('san-pham/{slug}','Frontend\FrontendDetailController@index')->name('frontend.detail.index');
-    Route::get('san-pham/{slug}/danh-gia','Frontend\FrontendDetailController@getRating')->name('frontend.detail.rating');
+    Route::get('danh-muc-san-pham/{slug}.html','Frontend\FrontendProductController@productCate')->name('frontend.product.category');
+    Route::get('danh-muc-san-pham-search/{slug}.html','Frontend\FrontendProductController@productCateSearch')->name('frontend.product.cate_search');
+    Route::get('san-pham/{slug}.html','Frontend\FrontendDetailController@index')->name('frontend.detail.index');
+    Route::get('san-pham/{slug}/danh-gia.html','Frontend\FrontendDetailController@getRating')->name('frontend.detail.rating');
     Route::get('bai-viet','Frontend\BlogController@index')->name('frontend.blog.index');
-    Route::get('bai-viet/{slug}','Frontend\ArticleDetailController@index')->name('frontend.blog_detail.index');
-    Route::get('thuong-hieu/{slug}','Frontend\FrontendTrademarkController@index')->name('frontend.blog_detail.index');
+    Route::get('bai-viet/{slug}.html','Frontend\ArticleDetailController@index')->name('frontend.blog_detail.index');
+    Route::get('thuong-hieu/{slug}.html','Frontend\FrontendTrademarkController@index')->name('frontend.thuong-hieu.index');
     Route::group(['prefix'=>'account'], function(){
     
         Route::get('register','Account\RegisterController@index')->name('frontend.account.register.index');
@@ -218,7 +235,7 @@ Route::group(['prefix'=>'frontend'], function(){
     Route::group(['prefix'=>'user'], function(){
         Route::get('dashboard', 'Account\DashboardController@index')->name('frontend.account.dashboard');
         Route::get('update-info', 'Account\DashboardController@edit')->name('frontend.account.edit');
-        Route::post('update-info/{id}', 'Account\DashboardController@update')->name('frontend.account.update');
+        Route::post('update-info/{id}.html', 'Account\DashboardController@update')->name('frontend.account.update');
         Route::get('transaction', 'Account\DashboardController@transaction')->name('frontend.account.transaction');
         Route::post('ajax-favorite/{id}','Account\FavoriteController@addFavorite')->name('ajax_get.user.add_favorite');
         Route::get('favorite', 'Account\FavoriteController@favorite')->name('frontend.account.favorite');
@@ -242,11 +259,11 @@ Route::group(['prefix'=>'frontend'], function(){
     Route::get('don-hang','Frontend\ShoppingCartController@index')->name('frontend.shopping.index');
     Route::group(['prefix'=>'shopping'], function(){
     
-        Route::get('add/{id}','Frontend\ShoppingCartController@add')->name('frontend.shopping.add');
+        Route::get('add/{id}.html','Frontend\ShoppingCartController@add')->name('frontend.shopping.add');
         
-        Route::get('delete/{id}','Frontend\ShoppingCartController@delete')->name('frontend.shopping.delete');
+        Route::get('delete/{id}.html','Frontend\ShoppingCartController@delete')->name('frontend.shopping.delete');
        
-        Route::get('update/{id}','Frontend\ShoppingCartController@update')->name('frontend.shopping.update');
+        Route::get('update/{id}.html','Frontend\ShoppingCartController@update')->name('frontend.shopping.update');
 
         Route::post('pay','Frontend\ShoppingCartController@postpay');
         Route::get('update/{id}/{rowId}/{qty}','Frontend\ShoppingCartController@update')->name('frontend.shopping.update');
