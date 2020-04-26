@@ -56,9 +56,10 @@ class ShoppingCartController extends Controller
             $order->od_price = $item->price;
             $order->save();
            \DB::table('products')->where('id',$item->id)->increment('pro_pay',$item->qty);
+           \DB::table('products')->where('id',$item->id)->decrement('pro_number',$item->qty);
         }
         
-        toastr()->success('Mua hàng thành công');
+        toastr()->success('Mua hàng thành công. Đơn hàng của bạn sẽ được chuyển đến sau 2 ngày');
         Cart::destroy();
         return redirect()->back();
 

@@ -33,6 +33,7 @@ class AdminProductController extends Controller
         $product->pro_sale = $Request->pro_sale;
     	$product->created_at = Carbon::now();
         $product->pro_country = $Request->pro_country;
+        $product->pro_number = $Request->pro_number;
         $product->pro_energy = $Request->pro_energy;
         $product->pro_resistant = $Request->pro_resistant;
         if ($Request->pro_avatar) {
@@ -98,6 +99,7 @@ class AdminProductController extends Controller
     	$product->created_at = Carbon::now();
         $product->pro_country = $Request->pro_country;
         $product->pro_sale = $Request->pro_sale;
+        $product->pro_number = $Request->pro_number;
         $product->pro_energy = $Request->pro_energy;
         $product->pro_resistant = $Request->pro_resistant;
         if ($Request->pro_avatar) {

@@ -1,3 +1,4 @@
+
 <div class="filter-sidebar">
   
  
@@ -26,7 +27,7 @@
                         @foreach($attribute as $item)
                        
                         <li>
-                            <label>
+                            <label >
                             <a href="{{request()->fullUrlWithQuery(['attr'.$item['id']=>$item['id']])}}"><h2><span>{{$item['atb_name']}}</span></h2></a>
                                 
                             </label>

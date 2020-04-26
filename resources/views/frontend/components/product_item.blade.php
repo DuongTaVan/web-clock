@@ -1,7 +1,7 @@
 <div class="product-item">
 	@if(isset($pr))
     <a href="{{route('frontend.detail.index',$pr->id)}}"  class="avatar image contain">
-        <img alt="" src="{{pare_url_file($pr->pro_avatar)}}" class="lazyload">
+        <img alt="" src="{{asset('images/preloader.gif')}}" data-src="{{pare_url_file($pr->pro_avatar)}}" class="lazyload lazy">
     </a>
     <a href="{{route('frontend.detail.index',$pr->id)}}" title="" >
         <h3>{{$pr->pro_name}}</h3>

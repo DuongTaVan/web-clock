@@ -8,6 +8,7 @@ use App\Models\{Product};
 use App\User;
 class FavoriteController extends Controller
 {
+    
     public function addFavorite(Request $request, $id){
         if($request->ajax()){
             $product = Product::find($id);

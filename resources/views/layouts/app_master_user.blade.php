@@ -50,7 +50,8 @@
 <div class="container user">
     <div class="left">
         <div class="header">
-            <img src="{{ pare_url_file(Auth::user()->avatar) }}" alt="">
+
+            <img src="{{ asset(Auth::user()->avatar) }}" alt="">
             <p>
                 <span>Tài khoản của</span>
                 <span>{{Auth::user()->name}}</span>
@@ -100,6 +101,7 @@
 <script>
   var DEVICE = '{{  device_agent() }}'
 </script>
+
 <script src="{{ asset('js/cart.js') }}" type="text/javascript"></script>
 
 @yield('script')

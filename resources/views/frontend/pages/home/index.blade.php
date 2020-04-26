@@ -20,7 +20,7 @@
             @foreach($trademarks as $trademark)
                 <div class="item">
                     <a href="{{route('frontend.product.cate_search',$trademark->trm_name)}}" title="{{$trademark->trm_name}}">
-                        <img class="lazyload" src="{{asset($trademark->image)}}" data-src="" alt="Atlantic Swiss" />
+                        <img class="lazyload lazy" data-src="{{asset($trademark->image)}}" src="{{asset('images/preloader.gif')}}" alt="Atlantic Swiss" />
                     </a>
                 </div>
             @endforeach
@@ -65,7 +65,7 @@
                 <div class="left">
                     <div class="image">
                         <a href="#" title="" class="" target="_blank">
-                            <img class="lazyload" alt="" src="{{asset($location_2->ev_image)}}" />
+                            <img class="lazyload lazy" alt="" data-src="{{asset($location_2->ev_image)}}" src="{{asset('images/preloader.gif')}}" />
                         </a>
                     </div>
                 </div>
