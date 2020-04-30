@@ -65,6 +65,18 @@ class AdminTrademarkController extends Controller
     	$trademark->save();
     	return redirect()->route('admin.trademark.index');
     }
+    public function active($id){
+        $trademark = Trademark::find($id);
+        $trademark->trm_active =! $trademark->trm_active;
+        $trademark->save();
+        return redirect()->back();
+    }
+    public function hot($id){
+        $trademark = Trademark::find($id);
+        $trademark->trm_hot =! $trademark->trm_hot;
+        $trademark->save();
+        return redirect()->back();
+    }
     public function delete($id)
     {
         $trademark = Trademark::find($id);

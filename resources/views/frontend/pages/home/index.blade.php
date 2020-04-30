@@ -14,7 +14,7 @@
 
 @stop
 @section('content')
-    @include('frontend/components.slider')
+    @include('frontend/components.slider',['slides'=>$slides])
     <div class="container">
         <div class="logo-partner">
             @foreach($trademarks as $trademark)
@@ -39,7 +39,9 @@
                 <div class="left">
                     <div class="image">
                         <a href="#" title="" class="" target="_blank">
+                            @if(isset($location_1))
                             <img class="lazyload" alt="" src="{{asset($location_1->ev_image)}}" />
+                            @endif
                         </a>
                     </div>
                 </div>
@@ -65,7 +67,9 @@
                 <div class="left">
                     <div class="image">
                         <a href="#" title="" class="" target="_blank">
+                            @if(isset($location_2))
                             <img class="lazyload lazy" alt="" data-src="{{asset($location_2->ev_image)}}" src="{{asset('images/preloader.gif')}}" />
+                            @endif
                         </a>
                     </div>
                 </div>
@@ -91,7 +95,9 @@
                 <div class="left">
                     <div class="image">
                         <a href="#" title="" class="" target="_blank">
+                            @if(isset($location_3))
                             <img class="lazyload" alt="" src="{{asset($location_3->ev_image)}}" />
+                            @endif
                         </a>
                     </div>
                 </div>

@@ -26,7 +26,7 @@
                     <th scope="col">Avatar</th>
                     <th scope="col">Price</th>
                     <th scope="col">Time</th>
-                    <th scope="col">Action</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +54,7 @@
                             <th>
                                {{ $pr->created_at }}
                             </th>
-                            <th><a href="">Hủy bỏ</a></th>
+                            
                         </tr>
                         @endforeach
                     

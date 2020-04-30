@@ -34,7 +34,8 @@
 	                  <th>Slug</th>
 	                  <th>Location</th>
 	                  <th>Avatar</th>
-                    <th>Time</th>
+                    <th>Hot</th>
+                    <th>Active</th>
 	                  <th>Action</th>
 	                </tr>
 
@@ -46,9 +47,25 @@
                     <td>{{$event->ev_name}}</td>
                     <td>{{$event->ev_slug}}</td>
                     <td>Home {{$event->location}}</td>
-                    <td><img src="{{$event->ev_image}}" height="348px" width="314px"></td>
-                  
-                    <td>{{$event['created_at']}}</td>
+                    <td><img src="{{$event->ev_image}}" height="148px" width="114px"></td>
+                    <td>
+                      @if($event->ev_hot==1)
+                        <a href="{{route('admin.event.hot',$event->id)}}" class="label label-info">Hot</a>
+                      @else
+                        <a href="{{route('admin.event.hot',$event->id)}}" class="label label-default">None</a> 
+                     
+                      @endif
+                      </td>
+                      <td>
+                      @if($event->ev_active==1)
+                        <a href="{{route('admin.event.active',$event->id)}}" class="label label-info">Hot</a>
+                      @else
+                        <a href="{{route('admin.event.active',$event->id)}}" class="label label-default">None</a> 
+                     
+                      @endif
+                    
+                    <td>
+                    
                     <td>
                       <a href="{{route('admin.event.update',$event->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-pencil">Edit</i></a>
                       <a href="{{route('admin.event.delete',$event->id)}}" class="btn btn-xs btn-danger"><i class="fa fa-trash">Delete</i></a> 

@@ -85,7 +85,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
     Route::group(['prefix'=>'statistical','middleware'=>'checkAcl:statistical'], function(){
         Route::get('','Admin\AdminStatisticalController@index')->name('admin.statistical.index');
     });
-    Route::group(['prefix'=>'warehouse','middleware'=>'checkAcl:statistical'], function(){
+    Route::group(['prefix'=>'warehouse','middleware'=>'checkAcl:warehouse'], function(){
         Route::get('','Admin\AdminWareHouseController@index')->name('admin.warehouse.index');
     });
 
@@ -186,23 +186,37 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
 
         Route::get('update/{id}','Admin\AdminTrademarkController@edit')->name('admin.trademark.update');
         Route::post('update/{id}','Admin\AdminTrademarkController@update');
-        
         Route::get('hot/{id}','Admin\AdminTrademarkController@hot')->name('admin.trademark.hot');
+        Route::get('active/{id}','Admin\AdminTrademarkController@active')->name('admin.trademark.active');
+        
         Route::get('delete/{id}','Admin\AdminTrademarkController@delete')->name('admin.trademark.delete');
     });
 
-    Route::group(['prefix' => 'event','trademark','middleware'=>'checkAcl:event'], function(){
+    Route::group(['prefix' => 'event','middleware'=>'checkAcl:event'], function(){
         Route::get('','Admin\AdminEventController@index')->name('admin.event.index');
         Route::get('create','Admin\AdminEventController@create')->name('admin.event.create');
         Route::post('createe','Admin\AdminEventController@store');
 
         Route::get('update/{id}','Admin\AdminEventController@edit')->name('admin.event.update');
         Route::post('update/{id}','Admin\AdminEventController@update');
-        
+        Route::get('hot/{id}','Admin\AdminEventController@hot')->name('admin.event.hot');
+        Route::get('active/{id}','Admin\AdminEventController@active')->name('admin.event.active');
         Route::get('hot/{id}','Admin\AdminEventController@hot')->name('admin.event.hot');
         Route::get('delete/{id}','Admin\AdminEventController@delete')->name('admin.event.delete');
     });
-    
+    Route::group(['prefix' => 'slide','middleware'=>'checkAcl:slide'], function(){
+        Route::get('','Admin\AdminSlideController@index')->name('admin.slide.index');
+        Route::get('create','Admin\AdminSlideController@create')->name('admin.slide.create');
+        Route::post('createe','Admin\AdminSlideController@store');
+        Route::get('hot/{id}','Admin\AdminSlideController@hot')->name('admin.slide.hot');
+        Route::get('active/{id}','Admin\AdminSlideController@active')->name('admin.slide.active');
+
+        Route::get('update/{id}','Admin\AdminSlideController@edit')->name('admin.slide.update');
+        Route::post('update/{id}','Admin\AdminSlideController@update');
+        
+       
+        Route::get('delete/{id}','Admin\AdminSlideController@delete')->name('admin.slide.delete');
+    });
 });
 
 //  FRONT END

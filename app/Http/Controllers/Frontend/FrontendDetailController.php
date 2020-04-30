@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Services\ProcessViewService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\User;
 use App\Models\{Product, Rating, Comment, RepComment, ProductImage};
 
 class FrontendDetailController extends Controller
@@ -27,10 +27,15 @@ class FrontendDetailController extends Controller
             $ratingsDashboard = Rating::groupBy('r_number')->where('r_product_id',$id)->select(\DB::raw('count(r_number) as count_number'),\DB::raw('sum(r_number) as total'))->addSelect('r_number')->get()->toArray();
             //dd($ratingsDashboard);
             $ratingDefault = $this->mapRatingDefault();
-            //dd($ratingDefaultt);
+
+            
+            
+
     		foreach ($ratingsDashboard as $key => $item) {
                 $ratingDefault[$item['r_number']] = $item;
             }
+            //dd(1);
+            
              //dd($ratingDefault);
     		return view('frontend.pages.product_detail.index', compact('product','products','ratings','ratingDefault','comments','rep_comments','product_images'));	
     	}
@@ -69,10 +74,12 @@ class FrontendDetailController extends Controller
         $ratingsDashboard = Rating::groupBy('r_number')->where('r_product_id',$id)->select(\DB::raw('count(r_number) as count_number'),\DB::raw('sum(r_number) as total'))->addSelect('r_number')->get()->toArray();
         //dd($ratingsDashboard);
         $ratingDefault = $this->mapRatingDefault();
+        
         //dd($ratingDefaultt);
         foreach ($ratingsDashboard as $key => $item) {
             $ratingDefault[$item['r_number']] = $item;
         }
+
         return view('frontend.pages.product_detail.product_rating', compact('product','products','ratings','ratingDefault','query'));    
     }
 }

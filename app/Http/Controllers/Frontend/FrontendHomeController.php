@@ -4,17 +4,37 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Product, Trademark, Category, Event};
+use App\Models\{Product, Trademark, Category, Event, Slide};
 
 class FrontendHomeController extends Controller
 {
     public function index(){
         //dd(1);
-        
-    	$trademarks = Trademark::all();
-        $location_1 = Event::where('location','1')->first();
-        $location_2 = Event::where('location','2')->first();
-        $location_3 = Event::where('location','3')->first();
+        $slides = Slide::where([
+                        ['s_hot', 1],
+                        ['s_active', 1]])->orderBy('id','DESC')->take(4)->get();
+        //dd($slides);
+    	$trademarks = Trademark::where([
+                        ['trm_hot', 1],
+                        ['trm_active', 1],
+                        
+                        ])->take(6)->get();
+        $location_1 = Event::where([
+                        ['ev_hot', 1],
+                        ['ev_active', 1],
+                        ['location','1']
+                        ])->first();
+        //dd($location_1);
+        $location_2 = Event::where([
+                        ['ev_hot', 1],
+                        ['ev_active', 1],
+                        ['location','2']
+                        ])->first();
+        $location_3 = Event::where([
+                        ['ev_hot', 1],
+                        ['ev_active', 1],
+                        ['location','3']
+                        ])->first();
         //dd($location_1);
     	//dd($trademarks);
     	$product = Product::orderBy('id','DESC')->take(4)->get();
@@ -47,7 +67,8 @@ class FrontendHomeController extends Controller
             'diamond_items' => $diamond_items,
             'location_1' => $location_1,
             'location_2' => $location_2,
-            'location_3' => $location_3
+            'location_3' => $location_3,
+            'slides'=> $slides
     	];
     	return view('frontend.pages.home.index',$data);
     }

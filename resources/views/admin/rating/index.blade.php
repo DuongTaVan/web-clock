@@ -29,9 +29,7 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header width-border">
-        	<div class="box-header">
-        		<h3 class="box-title"><a href="{{route('admin.user.create')}}" class="btn btn-primary">Thêm mới <i class="fa fa-plus"></i></a></h3>
-        	</div>
+        	
         
 	        <div class="box-body">
 	        	<div class="col-md-12">

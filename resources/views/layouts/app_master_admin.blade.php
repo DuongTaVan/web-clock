@@ -38,7 +38,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -220,6 +220,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+        @can('role_permission')
         <li class="treeview">
           <a href="">
             <i class="fa fa-dashboard"></i> <span>Role Permission</span>
@@ -233,7 +234,8 @@
             <li><a href="{{route('permission.list')}}"><i class="fa fa-circle-o"></i> Permission</a></li>
           </ul>
         </li>
-       
+        @endcan
+       @can('category')
         <li class="">
           <a href="{{route('admin.category.index')}}">
             <i class="fa fa-edit"></i> <span>Category</span>
@@ -241,6 +243,8 @@
           </a>
           
         </li>
+        @endcan
+        @can('key')
         <li class="">
           <a href="{{route('admin.keyword.index')}}">
             <i class="fa fa-key"></i> <span>Keyword</span>
@@ -248,6 +252,8 @@
           </a>
           
         </li>
+        @endcan
+        @can('attribute')
         <li class="">
           <a href="{{route('admin.attribute.index')}}">
             <i class="fa fa-exchange"></i> <span>Attribute</span>
@@ -255,13 +261,16 @@
           </a>
           
         </li>
+        @endcan
+        @can('product')
         <li class="">
           <a href="{{route('admin.product.index')}}">
             <i class="fa fa-database"></i> <span>Product</span>
             
-          </a>
-          
+          </a> 
         </li>
+        @endcan
+        @can('user')
         <li class="">
           <a href="{{route('admin.user.index')}}">
             <i class="fa fa-user"></i> <span>User</span>
@@ -269,6 +278,8 @@
           </a>
           
         </li>
+        @endcan
+        @can('transport')
         <li class="">
           <a href="{{route('admin.transaction.index')}}">
             <i class="fa fa-money"></i> <span>Transaction</span>
@@ -276,6 +287,8 @@
           </a>
           
         </li>
+        @endcan
+        @can('menu')
         <li class="">
           <a href="{{route('admin.menu.index')}}">
             <i class="fa fa-book"></i> <span>Menu</span>
@@ -283,6 +296,8 @@
           </a>
           
         </li>
+        @endcan
+        @can('article')
         <li class="">
           <a href="{{route('admin.article.index')}}">
             <i class="fa fa-file-text-o"></i> <span>Article</span>
@@ -290,6 +305,8 @@
           </a>
           
         </li>
+        @endcan
+        @can('Rating')
         <li class="">
           <a href="{{route('admin.rating.index')}}">
             <i class="fa fa-file-text-o"></i> <span>Rating</span>
@@ -297,6 +314,8 @@
           </a>
           
         </li>
+        @endcan
+        @can('warehouse')
         <li class="">
           <a href="{{route('admin.warehouse.index')}}">
             <i class="fa fa-file-text-o"></i> <span>Warehouse</span>
@@ -304,13 +323,21 @@
           </a>
           
         </li>
+        @endcan
         
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+        @can('slide')
+        <li><a href="{{route('admin.slide.index')}}"><i class="fa fa-circle-o text-red"></i> <span>Slide</span></a></li>
+        @endcan
+        @can('statistical')
         <li><a href="{{route('admin.statistical.index')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Statistical</span></a></li>
-        <li><a href="{{route('admin.trademark.index')}}"><i class="fa fa-circle-o text-teal"></i> <span>Trademark</span></a></li>
+        @endcan
+        @can('trademark')
+        <li><a href="{{route('admin.trademark.index')}}"><i class="fa fa-circle-o text-blue"></i> <span>Trademark</span></a></li>
+        @endcan
+        @can('event')
         <li><a href="{{route('admin.event.index')}}"><i class="fa fa-circle-o text-aqua"></i> <span>Event</span></a></li>
+        @endcan
       </ul>
     </section>
     <!-- /.sidebar -->

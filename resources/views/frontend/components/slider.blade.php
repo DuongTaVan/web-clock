@@ -1,14 +1,11 @@
 <div id="slider">
     <div class="imageSlide js-banner owl-carousel">
+        @foreach($slides as $slide)
         <div>
-            <a href="" title="">
-                <img alt="DQW" src="{{asset('images/salebanner.jpg')}}" />
+            <a href="" title="{{$slide->s_name}}">
+                <img alt="DQW" src="{{asset($slide->s_image)}}" />
             </a>
         </div>
-        <div>
-            <a href="" title="">
-                <img alt="DQW" src="{{asset('images/banner_giao-hang.jpg')}}" />
-            </a>
-        </div>
+        @endforeach
     </div>
 </div>

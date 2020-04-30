@@ -68,6 +68,18 @@ class AdminEventController extends Controller
     	$event->save();
     	return redirect()->route('admin.event.index');
     }
+    public function active($id){
+        $event = Event::find($id);
+        $event->ev_active =! $event->ev_active;
+        $event->save();
+        return redirect()->back();
+    }
+    public function hot($id){
+        $event = Event::find($id);
+        $event->ev_hot =! $event->ev_hot;
+        $event->save();
+        return redirect()->back();
+    }
     public function delete($id)
     {
         $event = Event::find($id);

@@ -170,6 +170,7 @@
                     </div>
                 @include('frontend.pages.product_detail.include._inc_list_comment')
                 </div>
+               
             
             <div class="card-body product-des">
                 <div class="left">

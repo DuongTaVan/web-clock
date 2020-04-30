@@ -181,8 +181,8 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
 
-     
-
+        
+        
 
     ],
 

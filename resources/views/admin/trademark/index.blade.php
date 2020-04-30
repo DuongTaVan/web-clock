@@ -33,7 +33,8 @@
 	                  <th>Name</th>
 	                  <th>Slug</th>
 	                  <th>Avatar</th>
-                      <th>Time</th>
+                    <th>Hot</th>
+                    <th>Active</th>
 	                  <th>Action</th>
 	                </tr>
 
@@ -46,7 +47,23 @@
                     <td>{{$trademark->trm_slug}}</td>
                      <td><img src="{{$trademark->image}}" height="57px" width="189px"></td>
                   
-                    <td>{{$trademark['created_at']}}</td>
+                    <td>
+                      @if($trademark->trm_hot==1)
+                        <a href="{{route('admin.trademark.hot',$trademark->id)}}" class="label label-info">Hot</a>
+                      @else
+                        <a href="{{route('admin.trademark.hot',$trademark->id)}}" class="label label-default">None</a> 
+                     
+                      @endif
+                      </td>
+                      <td>
+                      @if($trademark->trm_active==1)
+                        <a href="{{route('admin.trademark.active',$trademark->id)}}" class="label label-info">Hot</a>
+                      @else
+                        <a href="{{route('admin.trademark.active',$trademark->id)}}" class="label label-default">None</a> 
+                     
+                      @endif
+                    
+                    <td>
                     <td>
                       <a href="{{route('admin.trademark.update',$trademark->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-pencil">Edit</i></a>
                       <a href="{{route('admin.trademark.delete',$trademark->id)}}" class="btn btn-xs btn-danger"><i class="fa fa-trash">Delete</i></a> 

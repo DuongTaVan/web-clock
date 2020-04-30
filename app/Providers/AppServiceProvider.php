@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\{Category,Menus};
 use View;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $category = Category::all();
         View::share('category',$category);
         View::share('menus',$menus);
+        Validator::extend('recaptcha', 'App\Validators\Recaptcha@validate');
 
     }
 }

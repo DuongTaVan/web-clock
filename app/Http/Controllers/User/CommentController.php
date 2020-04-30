@@ -9,16 +9,24 @@ class CommentController extends Controller
 {
     public function ajaxComment(Request $request){
     	if($request->ajax()){
+            // Check load lại page để hiện popup captcha
+            if (\Auth::user()->count_comment >= 2) {
+                return response([
+
+                    'messages' => '501'
+                ]);
+            }
     		$comment = new Comment();
     		$comment->cmt_user_id = \Auth::id();
     		$comment->cmt_name = \Auth::user()->name;
     		$comment->cmt_email = \Auth::user()->email;
             $comment->cmt_content = $request->comment;
             $comment->cmt_product_id = $request->productId;
-
     		$comment->save();
 
     		if($comment->id){
+                \DB::table('users')->where('id', \Auth::user()->id)
+                        ->increment('count_comment');
                 $html = view('frontend.pages.product_detail.include._inc_comment_item', compact('comment'))->render();
     			
     		}
