@@ -38,7 +38,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="" class="logo">
+    <a href="admin/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -70,7 +70,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="source/admin/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="{{\Auth::guard('admin')->user()->avatar}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -142,38 +142,25 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="source/admin/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="{{\Auth::guard('admin')->user()->avatar}}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{\Auth::guard('admin')->user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="source/admin/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="{{\Auth::guard('admin')->user()->avatar}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{\Auth::guard('admin')->user()->name}}
+                  <small>{{\Auth::guard('admin')->user()->address}}</small>
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
+              
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{route('profile.list',\Auth::guard('admin')->user()->id)}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{route('admin.account.getLogoutAdmin')}}" class="btn btn-default btn-flat">Sign out</a>
@@ -199,28 +186,18 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="source/admin/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{\Auth::guard('admin')->user()->avatar}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{get_data_user('admin','name')}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
+
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        @can('role_permission')
+      
         <li class="treeview">
           <a href="">
             <i class="fa fa-dashboard"></i> <span>Role Permission</span>
@@ -234,8 +211,7 @@
             <li><a href="{{route('permission.list')}}"><i class="fa fa-circle-o"></i> Permission</a></li>
           </ul>
         </li>
-        @endcan
-       @can('category')
+       
         <li class="">
           <a href="{{route('admin.category.index')}}">
             <i class="fa fa-edit"></i> <span>Category</span>
@@ -243,8 +219,8 @@
           </a>
           
         </li>
-        @endcan
-        @can('key')
+    
+       
         <li class="">
           <a href="{{route('admin.keyword.index')}}">
             <i class="fa fa-key"></i> <span>Keyword</span>
@@ -252,8 +228,7 @@
           </a>
           
         </li>
-        @endcan
-        @can('attribute')
+        
         <li class="">
           <a href="{{route('admin.attribute.index')}}">
             <i class="fa fa-exchange"></i> <span>Attribute</span>
@@ -261,16 +236,14 @@
           </a>
           
         </li>
-        @endcan
-        @can('product')
+        
         <li class="">
           <a href="{{route('admin.product.index')}}">
             <i class="fa fa-database"></i> <span>Product</span>
             
           </a> 
         </li>
-        @endcan
-        @can('user')
+       
         <li class="">
           <a href="{{route('admin.user.index')}}">
             <i class="fa fa-user"></i> <span>User</span>
@@ -278,8 +251,7 @@
           </a>
           
         </li>
-        @endcan
-        @can('transport')
+        
         <li class="">
           <a href="{{route('admin.transaction.index')}}">
             <i class="fa fa-money"></i> <span>Transaction</span>
@@ -287,8 +259,7 @@
           </a>
           
         </li>
-        @endcan
-        @can('menu')
+       
         <li class="">
           <a href="{{route('admin.menu.index')}}">
             <i class="fa fa-book"></i> <span>Menu</span>
@@ -296,8 +267,7 @@
           </a>
           
         </li>
-        @endcan
-        @can('article')
+        
         <li class="">
           <a href="{{route('admin.article.index')}}">
             <i class="fa fa-file-text-o"></i> <span>Article</span>
@@ -305,8 +275,7 @@
           </a>
           
         </li>
-        @endcan
-        @can('Rating')
+       
         <li class="">
           <a href="{{route('admin.rating.index')}}">
             <i class="fa fa-file-text-o"></i> <span>Rating</span>
@@ -314,8 +283,7 @@
           </a>
           
         </li>
-        @endcan
-        @can('warehouse')
+       
         <li class="">
           <a href="{{route('admin.warehouse.index')}}">
             <i class="fa fa-file-text-o"></i> <span>Warehouse</span>
@@ -323,24 +291,21 @@
           </a>
           
         </li>
-        @endcan
+      
         
         <li class="header">LABELS</li>
-        @can('slide')
+       
         <li><a href="{{route('admin.slide.index')}}"><i class="fa fa-circle-o text-red"></i> <span>Slide</span></a></li>
-        @endcan
-        @can('statistical')
+       
         <li><a href="{{route('admin.statistical.index')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Statistical</span></a></li>
-        @endcan
-        @can('trademark')
+     
         <li><a href="{{route('admin.trademark.index')}}"><i class="fa fa-circle-o text-blue"></i> <span>Trademark</span></a></li>
-        @endcan
-        @can('event')
+     
         <li><a href="{{route('admin.event.index')}}"><i class="fa fa-circle-o text-aqua"></i> <span>Event</span></a></li>
-        @endcan
+     
       </ul>
     </section>
-    <!-- /.sidebar -->
+   
   </aside>
 
   <!-- =============================================== -->

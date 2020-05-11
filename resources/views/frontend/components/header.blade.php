@@ -6,7 +6,7 @@
                 <a href="{{route('frontend.home.index')}}" class="desktop">
                     <img src="{{ url('images/icon/Logo.png') }}" alt="Home">
                 </a>
-                <a href="/" class="mobile">
+                <a href="{{route('frontend.home.index')}}" class="mobile">
                     <img src="{{ url('images/icon/LogoMobile.png') }}" alt="Home">
                 </a>
             </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Product, Trademark, Category, Event, Slide};
+use App\Models\{Product, Trademark, Category, Event, Slide, Articles};
 
 class FrontendHomeController extends Controller
 {
@@ -53,6 +53,15 @@ class FrontendHomeController extends Controller
     	$pens = Category::with('product')->where('c_name','BÚT KÝ CAO CẤP')->orderBy('id','DESC')->first();
         //$pens = $pens->product->take(5);
     	$glasses = Category::with('product')->where('c_name','KÍNH MẮT THỜI TRANG')->orderBy('id','DESC')->first();
+        $articlesHots = Articles::where([
+            'a_active' => 1,
+            'a_hot'    => 1
+        ])
+            ->select('id','a_name','a_slug','a_description','a_content','a_avatar','created_at')
+            ->orderByDesc('id')
+            ->limit(4)
+            ->get();
+
         //$glasses = $glasses->product->take(5);
     	//dd($philippes);
     	$data = [
@@ -68,7 +77,8 @@ class FrontendHomeController extends Controller
             'location_1' => $location_1,
             'location_2' => $location_2,
             'location_3' => $location_3,
-            'slides'=> $slides
+            'slides'=> $slides,
+            'articlesHot' => $articlesHots
     	];
     	return view('frontend.pages.home.index',$data);
     }

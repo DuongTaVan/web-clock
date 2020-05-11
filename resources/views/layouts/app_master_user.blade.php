@@ -86,6 +86,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('frontend.account.favorite')}}">Sản phẩm yêu thích</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('frontend.account.login')}}">Lịch sử đăng nhập</a>
+                        </li>
 
                     </ul>
                     <hr>

@@ -11,7 +11,7 @@ use App\Models\{Product, Category, Attributes,ProductAttribute,Keyword,ProductKe
 class AdminProductController extends Controller
 {
     public function index(){
-    	$product = Product::with('cate')->paginate(8); 
+    	$product = Product::with('cate')->orderByDesc('id')->paginate(8); 
     	return view('admin.product.index', compact('product'));
     }
     public function create(){

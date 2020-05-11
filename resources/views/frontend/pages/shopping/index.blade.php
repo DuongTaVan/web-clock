@@ -44,7 +44,7 @@
                                     <td>
                                         <div class="qty_number">
                                             <input type="number"  min="1" class="input_quantity" name="quantity_14692" value="{{  $item->qty }}" onchange="update('{{ $item->rowId }}',this.value,'{{$item->id}}')">
-                                            <a href="{{route('frontend.shopping.delete',$key)}}" class="js-delete-item btn-action-delete"><i class="la la-trash"></i>Delete</a>
+                                            <a href="{{route('frontend.shopping.delete',$key)}}" class="js-delete-item btn-action-delete"><i class="fa fa-trash"></i>Delete</a>
 
                                         </div>
                                     </td>

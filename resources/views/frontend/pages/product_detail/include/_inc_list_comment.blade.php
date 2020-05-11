@@ -2,7 +2,7 @@
     @foreach($comments as $cmt)
         <div class="item">
             <p class="item-auth">
-                <span>d</span>
+                <span><img width="25px" height="25px" src="{{asset($cmt->user->avatar)}}"></span>
                 <span>{{$cmt->cmt_name}}</span>
             </p>
             <p class="item-content">{{$cmt->cmt_content}}</p>
@@ -18,15 +18,15 @@
 
                         <div class="item">
                             <p class="item-auth">
-                                <span>d</span>
+                                <span>@if(isset($rep_comment->user->avatar))<img width="25px" height="25px" src="{{asset($rep_comment->user->avatar)}}">@else D @endif</span>
                                 <span>{{$rep_comment->rcmt_name}}</span>
                             </p>
                             <p class="item-content">{{$rep_comment->rcmt_content}}</p>
                             <p class="item-footer">
-                                <a href="" class="js-show-form-reply" data-name="{{ $rep_comment->user->name ?? "[N\A]" }}"
-                                   data-id="{{ $rep_comment->id }}" data-product="{{ $rep_comment->rcmt_product_id }}">Trả lời</a>
-                                <a href=""><i class="fa fa-thumbs-up"></i>Hài lòng</a>
-                                <a href=""><i class="fa fa-thumbs-down"></i>Không hài lòng</a>
+                                
+                                <a data-id="{{ $rep_comment->id }}"
+                   data-product="{{ $rep_comment->rcmt_product_id }}" class="js-like" href="{{route('user.ajax_like')}}"><i class="fa fa-thumbs-up"></i>Hài lòng ({{ $rep_comment->rcmt_like}})</a>
+                                <a class="" href=""><i class="fa fa-thumbs-down"></i>Không hài lòng</a>
                                 <a href="">{{ $cmt->created_at->diffForHumans() }}</a>
                             </p>
                         </div>
@@ -38,5 +38,6 @@
         </div>
         @endforeach
     <div> 
+        {{$comments->links()}}
     </div>
 </div>

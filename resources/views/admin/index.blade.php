@@ -9,9 +9,8 @@
         <small>Loading example</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Pace page</li>
+        <li><a><i class="fa fa-dashboard"></i> Home</a></li>
+        
       </ol>
     </section>
 
@@ -32,19 +31,20 @@
           </div>
         </div>
         <div class="box-body">
-          Pace loading works automatically on page. You can still implement it with ajax requests by adding this js:
-          <br/><code>$(document).ajaxStart(function() { Pace.restart(); });</code>
+          Welcome to the webmaster page
+          <br/><code>Contact: duongtv2712@gmail.com - facebook.com/dth999</code>
           <br/>
           <div class="row">
             <div class="col-xs-12 text-center">
-              <button type="button" class="btn btn-default btn-lrg ajax" title="Ajax Request">
-                <i class="fa fa-spin fa-refresh"></i>&nbsp; Get External Content
-              </button>
+              <a href="https://www.facebook.com/dth999" type="button" class="btn btn-default btn-lrg ajax" title="Ajax Request">
+                <i class="fa fa-spin fa-refresh"></i>&nbsp; Connect with administrator's facebook
+              </a>
             </div>
           </div>
           <div class="ajax-content">
           </div>
         </div>
+        
         <!-- /.box-body -->
         <div class="box-footer">
           Footer

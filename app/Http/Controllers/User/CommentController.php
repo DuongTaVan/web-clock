@@ -10,12 +10,12 @@ class CommentController extends Controller
     public function ajaxComment(Request $request){
     	if($request->ajax()){
             // Check load lại page để hiện popup captcha
-            if (\Auth::user()->count_comment >= 2) {
-                return response([
+            // if (\Auth::user()->count_comment >= 2) {
+            //     return response([
 
-                    'messages' => '501'
-                ]);
-            }
+            //         'messages' => '501'
+            //     ]);
+            // }
     		$comment = new Comment();
     		$comment->cmt_user_id = \Auth::id();
     		$comment->cmt_name = \Auth::user()->name;

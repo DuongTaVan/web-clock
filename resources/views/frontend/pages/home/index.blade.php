@@ -8,6 +8,91 @@
             .rating i.no_active{
                 color: #e8e8e8;
             }
+            
+    #box-news .bot {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+        box-sizing: border-box;}
+        #box-news .bot .col {
+            padding: 10px;
+            width: 25%;
+            max-width: 25%;
+        }
+
+        #box-news .bot .item {
+            height: 100%;
+            box-shadow: 0 5px 20px rgba(0,0,0,.05);
+        }
+        #box-news .bot .item__image img {
+             
+                width: 100%;
+                height: 210px;
+                -o-object-fit: cover;
+                object-fit: cover;
+          
+        }
+        #box-news .bot .item__content {
+            padding: 10px 15px;}
+        #box-news .bot .item__content .date-time {
+            margin-bottom: 10px;}
+        #box-news .bot .item__content .date-time i {
+            font-weight: 600;
+            color: #e50e1d;
+            margin-right: 5px;
+        }
+        #box-news .bot .item__content .date-time span {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: #707070;
+            display: inline-block;
+        }
+           
+
+        #box-news .bot .item__content .title {
+            margin-bottom: 10px;
+            color: #363636;
+            text-align: left;
+            display: block;
+            font-weight: 600;
+            width: 100%;
+            font-size: 16px;
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        #box-news .bot .item__content .description {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #707070;
+            line-height: 20px;
+            line-height: 1.5;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        @media (max-width: 767px) {
+         
+        #box-news .bot {
+            margin: 0;
+        }
+        #box-news .bot .col {
+                padding: 10px;
+                width: 100%;
+                max-width: 100%;
+            }
+        
+    }
+
+
+
            
             
         </style>
@@ -115,7 +200,7 @@
             <div class="top">
                 <a href="#" class="main-title">ĐỒNG HỒ ATLANTIC SWISS</a>
             </div>
-            <div class="bot">
+            <div class="bot ">
                 @if(isset($epos))
                 @foreach($epos->product as $item)
                     <div class="item">
@@ -155,6 +240,10 @@
                 @endif
             </div>
         </div>
+        <div class="product-two" id="product-recently"></div>
+        <div id="product-by-category"></div>
+        @include('frontend.pages.home.include._inc_article')
+
     </div>
 
 @stop

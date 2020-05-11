@@ -9,6 +9,6 @@ class RepComment extends Model
 {
     protected $table = 'rep_comments';
     public function user(){
-        return $this->belongsTo(User::class,'cmt_user_id');
+        return $this->belongsTo(User::class,'rcmt_user_id');
     }
 }

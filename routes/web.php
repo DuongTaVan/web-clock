@@ -32,6 +32,10 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
 	Route::get('/',function(){
 		return view('admin.index');
 	});
+    Route::group(['prefix'=>'profile'], function(){
+        Route::get('profile/{id}','Account\AdminController@getProfile')->name('profile.list');
+        Route::post('profile/{id}','Account\AdminController@postProfile')->name('profile.update');
+    });
 
     Route::group(['prefix'=>'admin'],function(){
         //list user
@@ -165,13 +169,7 @@ Route::group(['prefix'=>'admin','middleware'=>'checkLogin'],function(){
 
     Route::group(['prefix' => 'user','middleware'=>'checkAcl:user'], function(){
         Route::get('','Admin\AdminUserController@index')->name('admin.user.index');
-        Route::get('create','Admin\AdminUserController@create')->name('admin.user.create');
-        Route::post('createe','Admin\AdminUserController@store');
 
-        Route::get('update/{id}','Admin\AdminUserController@edit')->name('admin.user.update');
-        Route::post('update/{id}','Admin\AdminUserController@update');
-        
-        
         Route::get('delete/{id}','Admin\AdminUserController@delete')->name('admin.user.delete');
     });
     Route::group(['prefix' => 'rating','middleware'=>'checkAcl:rating'], function(){
@@ -248,6 +246,7 @@ Route::group(['prefix'=>'frontend'], function(){
 
     Route::group(['prefix'=>'user'], function(){
         Route::get('dashboard', 'Account\DashboardController@index')->name('frontend.account.dashboard');
+        Route::get('log_login', 'Account\LoginUserController@index')->name('frontend.account.login');
         Route::get('update-info', 'Account\DashboardController@edit')->name('frontend.account.edit');
         Route::post('update-info/{id}.html', 'Account\DashboardController@update')->name('frontend.account.update');
         Route::get('transaction', 'Account\DashboardController@transaction')->name('frontend.account.transaction');
@@ -256,6 +255,8 @@ Route::group(['prefix'=>'frontend'], function(){
         Route::post('ajax_rating','User\RatingController@ajaxRating')->name('user.ajax_rating');
         Route::post('ajax_comment','User\CommentController@ajaxComment')->name('get_ajax_comment');
         Route::post('ajax_rep_comment','User\CommentController@ajaxRepComment')->name('get_ajax_rep_comment');
+        //method route là post mà em gửi ajax là get
+        Route::post('ajax_like','User\RatingController@ajaxLike')->name('user.ajax_like');
         
     });
 

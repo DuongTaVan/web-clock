@@ -64,7 +64,8 @@ class DashboardController extends Controller
         return view('user.update_infor');
     }
     public function update(Request $request, $id){
-        $user = User::find($id)->firstOrFail();
+        $user = User::find($id);
+        //dd($user);
         $user->update($request->all());
         if ($request->hasFile('image')) {
             if ($user->avatar) {

@@ -77,16 +77,9 @@
 <script>
     var DEVICE = '{{ device_agent() }}';
 </script>
-<script type="text/javascript">
-    
-    $('.js-show-login').click(function(){
-        console.log('a');
-        event.preventDefault();
-        toastr.warning('Bạn phải đăng nhập để thực hiện tính năng này');
-        return false;
-    })
-</script>
+
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script type="text/javascript">
     /* lazyload.js (c) Lorenzo Giuliani

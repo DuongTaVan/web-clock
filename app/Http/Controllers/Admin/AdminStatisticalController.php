@@ -14,6 +14,9 @@ class AdminStatisticalController extends Controller
     	$totalTransactions = Transactions::count();
     	$totalRatings = Rating::count();
     	$totalUsers = User::count();
+        $product_pays = Product::with('cate')->orderByDesc('pro_pay')->paginate(5);
+        $product_news = Product::orderByDesc('id')->limit(5)->get();
+        //dd($product_news);
     	//dd($totalProducts);
     	// Thống kê trạng thái đơn hàng
         // Tiep nhan
@@ -49,7 +52,8 @@ class AdminStatisticalController extends Controller
             'totalRatings'               => $totalRatings,
 
             'statusTransaction'          => json_encode($statusTransaction),
-            
+            'product_pays'               => $product_pays,
+            'product_news'               => $product_news
         ];
 
         return view('admin.statistical.index', $viewData);

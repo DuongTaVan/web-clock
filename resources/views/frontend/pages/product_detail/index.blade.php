@@ -25,6 +25,26 @@
                 box-sizing: border-box;
                 margin: 20px 0 20px;
             }
+            .js-like-success{
+                color:red !important ;
+            }
+            .pagination{
+                margin: 10px auto;
+                margin-left: 9px;
+                display: flex;
+            }
+            .pagination li{
+                padding: 5px;
+                margin: 0 2px;
+                border: 1px solid #dedede;
+            }
+            .pagination li a, .pagination li span{
+                line-height: 25px;
+                display: block;
+                text-align: center;
+                width: 25px;
+                height: 25px;
+            }
             
         </style>
 
@@ -197,7 +217,16 @@
 @stop
 @section('script')
     <script src="{{ mix('js/product_detail.js') }}" type="text/javascript"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script type="text/javascript">
+    
+    $('.js-show-login').click(function(){
+        console.log('a');
+        event.preventDefault();
+        toastr.warning('Bạn phải đăng nhập để thực hiện tính năng này');
+        return false;
+    })
+    </script>
     <script type="text/javascript">
     $(function(){
         $(".js-add-favorite").click(function(event){
@@ -286,8 +315,9 @@
             let URL = $(this).parents('form').attr('action');
             let comment = $this.parents('form').find("textarea").val();
             if (!comment.length) {
-                toast.warning('Nội dung comments không được để trống!');
-                //alert('Nội dung comments không được để trống!');
+                //toast.warning('Nội dung comments không được để trống!');
+                toastr.warning('Nội dung comments không được để trống!');
+               // alert('Nội dung comments không được để trống!');
                 return false;
             }
             //alert(URL);
@@ -342,9 +372,10 @@
                 // $this.parents('.comments-reply').css('border','1px solid red');
                 //alert($item.parents('.comments-reply'));
                 $item.parents('.comments-reply').after(html)
+
             }else {
                 $item.append(html);
-            };
+            }
 
             $('.js-reply-comment').click(function(even){
                 even.preventDefault();
@@ -353,8 +384,9 @@
                 //alert(URL);
                 let comment = $this.parents('form').find("textarea").val();
                 if (!comment.length) {
-                    //toast.warning('Nội dung comments không được để trống!');
+                    
                     toastr.warning('Nội dung không được để trống!');
+                    
                     return false;
                 }
                 //let $item = $this.parentsUntil('.item');
@@ -368,8 +400,9 @@
                     data: $('#rep_comment').serialize(),
                 }).done(function(results){
                     $('#rep_comment')[0].reset();
+                    $("#rep_comment").remove();
                     //$('#form-review')[0].reset();
-                    $( ".js-show-form-reply" ).trigger( "click" );
+                    //$( ".js-show-form-reply" ).trigger( "click" );
                     //alert(123);
                     // if(results.html){
                     //     //$('#list-comment .item').last().remove();
@@ -385,8 +418,34 @@
                             $item.append(results.html);
                         };
                 });
+
         })
            
+
+        })
+        $('.js-like').click(function(even){
+            even.preventDefault();
+            let $this = $(this);
+            let commentID = $this.attr('data-id');
+            //alert(commentID);
+            let productID = $this.attr('data-product');
+            let URL = $this.attr('href');
+            let data = {commentID: commentID, productID: productID}
+            //let $item = $this.parentsUntil('.item');
+           $.ajax({
+             
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+            method:"POST",
+            url: URL,
+            data: data,
+            })
+            .done(function(results) {
+                //alert(results.messages);
+                console.log(results);
+                $this.addClass('js-like-success');
+              });
 
         })
         

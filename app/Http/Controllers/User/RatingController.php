@@ -24,6 +24,16 @@ class RatingController extends Controller
     	}
     	
     }
+    public function ajaxLike(Request $request){
+        if($request->ajax()){
+            \DB::table('rep_comments')->where('id', $request->commentID)
+                        ->increment('rcmt_like');
+            return response(['messages'=>'Đánh giá thành công']);
+            //echo 
+            
+        }
+        return response(['messages'=>'abcd']);
+    }
     private function staticRatingProduct($productID,$number){
     	$product = Product::find($productID);
     	$product->pro_review_total++;

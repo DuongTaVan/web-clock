@@ -42,7 +42,9 @@ class RegisterController extends Controller
         $log = get_agent();
         $historyLog = \Auth::user()->log_login;
         $historyLog = json_decode($historyLog,true) ?? [];
+
         $historyLog[] = $log;
+        //dd($historyLog);
         \DB::table('users')->where('id', \Auth::user()->id)
             ->update([
                 'log_login' => json_encode($historyLog)

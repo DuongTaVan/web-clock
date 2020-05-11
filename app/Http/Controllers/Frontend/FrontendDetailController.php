@@ -21,9 +21,12 @@ class FrontendDetailController extends Controller
     		$product = Product::findOrFail($id);
             ProcessViewService::view('products','pro_view','product',$id);
             $products = Product::where('pro_active',1)->orderBy('id','DESC')->paginate(12);
-            $ratings = Rating::with('user:id,name')->where('r_product_id',$id)->orderByDesc('id')->limit(5)->get();
-            $comments = Comment::with('user:id,name')->where('cmt_product_id',$id)->orderByDesc('id')->limit(5)->get();
-            $rep_comments = RepComment::with('user:id,name')->where('rcmt_product_id',$id)->orderByDesc('id')->limit(5)->get();
+            $ratings = Rating::with('user:id,name,avatar')->where('r_product_id',$id)->orderByDesc('id')->limit(5)->get();
+
+            $comments = Comment::with('user:id,name,avatar')->where('cmt_product_id',$id)->orderByDesc('id')->paginate(5);
+            
+            $rep_comments = RepComment::with('user:id,name,avatar')->where('rcmt_product_id',$id)->orderByDesc('id')->limit(10)->get();
+            //dd($rep_comments);
             $ratingsDashboard = Rating::groupBy('r_number')->where('r_product_id',$id)->select(\DB::raw('count(r_number) as count_number'),\DB::raw('sum(r_number) as total'))->addSelect('r_number')->get()->toArray();
             //dd($ratingsDashboard);
             $ratingDefault = $this->mapRatingDefault();

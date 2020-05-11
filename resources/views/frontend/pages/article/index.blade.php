@@ -15,9 +15,7 @@
                             </a>
                         </div>
                         <a href="" title="" class="title">{{$articles_one->a_name}}</a>
-                        <p class="intro-short">
-                            {!!$articles_one->a_description!!}
-                        </p>
+                        <a>{!!$articles_one->a_description!!}</a>
                     </div>
                     <div class="hot-right">
                         <div class="top">
@@ -43,7 +41,7 @@
             </div>
             <div class="right">
                 <div class="top-question">
-                    <div class="title">Hỏi đáp về đồng hồ</div>
+                    <div class="title">Tin tức - sự kiện</div>
                     <ul>
                         @foreach($articleHotSidebarTop as $key=> $item)
                         <li>
