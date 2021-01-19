@@ -178,6 +178,11 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Yoeunes\Toastr\ToastrServiceProvider::class,
+
+        
+        
 
     ],
 
@@ -232,6 +237,7 @@ return [
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+      
     ],
 
 ];

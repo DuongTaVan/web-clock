@@ -6,13 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{Product, Transactions, Orders};
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TransactionSuccess;
 use Cart;
 use Auth;
 class ShoppingCartController extends Controller
 {
     public function add($id){
     	$product = Product::find($id);
+        if($product->pro_number < 1){
+            
+            toastr()->warning('Xin lỗi, Số lượng sản phẩm không đủ!');
+        
+            return redirect()->back();
+        }
     	Cart::add(['id' => $product->id, 'name' => $product->pro_name, 'qty' => 1, 'price'   => number_price($product->pro_price, $product->pro_sale), 'weight' => 1, 'options' => ['sale' => $product->pro_sale,'image' => $product->pro_avatar,'price_old' => $product->pro_price,]]);
+        toastr()->success('Đặt hàng thành công');
     	return redirect()->back();
     }
     public function index(){
@@ -37,6 +46,7 @@ class ShoppingCartController extends Controller
         $transactions->tst_note = $Request->tst_note;
         $transactions->save();
         $shopping = Cart::content();
+        Mail::to($Request->tst_email)->send(new TransactionSuccess($shopping));
         foreach($shopping as $key =>$item){
             $order = new Orders;
             $order->od_transaction_id = $transactions->id;
@@ -46,10 +56,26 @@ class ShoppingCartController extends Controller
             $order->od_price = $item->price;
             $order->save();
            \DB::table('products')->where('id',$item->id)->increment('pro_pay',$item->qty);
+           \DB::table('products')->where('id',$item->id)->decrement('pro_number',$item->qty);
         }
-        \Session::flash('toastr',['type'=>'success','message'=>'Mua hàng thành công']);
+        
+        toastr()->success('Mua hàng thành công. Đơn hàng của bạn sẽ được chuyển đến sau 2 ngày');
         Cart::destroy();
         return redirect()->back();
 
+    }
+    public function update(Request $request,$id,$rowId, $qty){
+        if($request->ajax()){
+            $product = Product::find($id);
+            if($product->pro_number < $qty)
+            {
+                return response(['messages'=>'Không đủ số lượng sản phẩm cần update']);
+            }
+
+            Cart::update($rowId, $qty); 
+                return response(['messages'=>'Cập nhật thành công']);
+        }
+        
+       
     }
 }

@@ -4,9 +4,9 @@
             <div rel="countdown" data-endat="1575564960000" oncomplete="auctionComplete(0)"></div>
         </div>
     </div>
-    <a href="flash-sale.html" title="" class="image" target="_blank">
+    <!-- <a href="flash-sale.html" title="" class="image" target="_blank">
         <img data-src="/view/sanpham/flsh-sale12.jpg" alt="" src="view/sanpham/flsh-sale12.jpg" class="lazyload" width="100%" />
-    </a>
+    </a> -->
 
 </div>
 <div class="cb"></div>

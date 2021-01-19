@@ -1,6 +1,6 @@
 <form role="form" action="" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="col-sm-8">
+    <div class="col-sm-10">
         <div class="box box-warning">
             <div class="box-header with-border">
                 <h3 class="box-title">Thông tin cơ bản</h3>
@@ -29,7 +29,7 @@
                              <input type="number" name="pro_sale" value="{{  $product->pro_sale ?? old('pro_sale',0) }}" class="form-control" data-type="currency" placeholder="5">
                         </div>
                     </div>
-                  <div class="col-sm-9">
+                  <div class="col-sm-3">
                      <div class="form-group">
                          <label for="tag">Keyword</label>
                           <select name="keywords[]" class="form-control js-select2-keyword" multiple="">
@@ -41,7 +41,7 @@
                             </select>
                         </div>
                     </div>
-                <div class="form-group ">
+                <div style="clear: both;" class="form-group ">
                     <label for="exampleInputEmail1">Description</label>
                     <textarea value="{{  $product->pro_description ?? old('pro_description',0) }}" name="pro_description" class="form-control" cols="5" rows="2" autocomplete="off">{{  $product->pro_description ?? old('pro_description') }}</textarea>
                     @if ($errors->first('pro_description'))

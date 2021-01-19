@@ -6,13 +6,13 @@
                 <a href="{{route('frontend.home.index')}}" class="desktop">
                     <img src="{{ url('images/icon/Logo.png') }}" alt="Home">
                 </a>
-                <a href="/" class="mobile">
+                <a href="{{route('frontend.home.index')}}" class="mobile">
                     <img src="{{ url('images/icon/LogoMobile.png') }}" alt="Home">
                 </a>
             </div>
             <div class="search">
-                <form action="" role="search" method="post">
-                    <input type="text" name="keyword" class="form-control" placeholder="Tìm kiếm sản phẩm ...">
+                <form action="{{route('frontend.product.index')}}" role="search" method="get">
+                    <input type="text" name="k" value="{{Request::get('k')}}" class="form-control" placeholder="Tìm kiếm sản phẩm ...">
                     <button type="submit" class="btnSearch">
                         <i class="fa fa-search"></i>
                         <span>Tìm kiếm</span>
@@ -25,7 +25,7 @@
                             <span class="text">
                                 <span class="">Giỏ hàng ({{Cart::count()}})</span>
                                 <span></span>
-	                        </span>
+                            </span>
                         </a>
                     </li>
                     <li>
@@ -62,9 +62,17 @@
                     <i class="fa fa-bars"></i> Danh mục sản phẩm
                 </a>
                 <ul id="menu">
+                    <li>
+                        <a href="{{route('frontend.product.index')}}" >
+                            TẤT CẢ SẢN PHẨM
+                            <span class="openSub">
+                                <i class="icon icon-submenu"></i>
+                            </span>
+                        </a>
+                    </li>
                     @foreach($category as $cate)
                     <li>
-                        <a href="{{route('frontend.product.index')}}" title="{{$cate->c_name}}">
+                        <a href="{{route('frontend.product.category',$cate->c_slug.'-'.$cate->id)}}" title="{{$cate->c_name}}">
                             {{$cate->c_name }}
                             <span class="openSub">
                                 <i class="icon icon-submenu"></i>
@@ -79,16 +87,35 @@
             <div class="menu-right">
                 <div class="left">
                     <ul>
-                        @foreach($category as $cate)
+                        
+                        
                         <li>
-                            <a href="" title="{{$cate->c_name}}">
-									<span class="name">
-										{{$cate->c_name}}
-									</span>
+                            <a href="{{route('frontend.product.cate_search','Đồng hồ')}}" title="ĐỒNG HỒ">
+                                    <span class="name">
+                                        Đồng hồ
+                                    </span>
+                                    <i class="icon icon-clock"></i>
                                 
                             </a>
                         </li>
-                        @endforeach
+                        <li>
+                            <a href="{{route('frontend.product.cate_search','Kính mắt')}}" title="Kính mát thời trang">
+                                    <span class="name">
+                                        Kính mắt
+                                    </span>
+                                <i class="icon icon-glasses"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('frontend.product.cate_search','Phụ kiện')}}" title="Phụ kiện đồng hồ">
+                                    <span class="name">
+                                        Phụ kiện
+                                    </span>
+                                <i class="icon icon-accessories"></i>
+                            </a>
+                        </li>
+                        
+                       
                         @if(!isset(Auth::user()->name))
                         <li>
                             <a href="{{route('frontend.account.login.index')}}" title="Dangnhap">
@@ -115,6 +142,7 @@
                                     </span>  
                             </a>
                         </li>
+                      
                         <li>
                             <a href="{{route('frontend.account.logout.index')}}" title="Dangki">
                                     <span class="name">
@@ -128,10 +156,14 @@
                     </ul>
                 </div>
                 <div class="right">
-                    <a href="/tin-tuc/561/Mua-hang-tra-gop-lai-suat-0-Rinh-ngay-dong-ho-hieu.html" title="Trả góp">
-                        <span class="text">Trả góp 0%</span>
-                        <i class="icon icon-installment"></i>
+                     @if(\Auth::user())
+                    <a href="{{route('frontend.account.dashboard')}}" title="Trả góp">
+                       
+                        <span class="text">Profile &nbsp</span>
+                        <i class="fa fa-user"></i>
+                      
                     </a>
+                      @endif
                     <a href="{{route('frontend.blog.index')}}" title="Tin tức - Sự kiện">
                         <i class="icon icon-news"></i>
                         <span class="text">Tin tức</span>

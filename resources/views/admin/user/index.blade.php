@@ -21,9 +21,6 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header width-border">
-        	<div class="box-header">
-        		<h3 class="box-title"><a href="{{route('admin.user.create')}}" class="btn btn-primary">Thêm mới <i class="fa fa-plus"></i></a></h3>
-        	</div>
         
 	        <div class="box-body">
 	        	<div class="col-md-12">
@@ -46,7 +43,6 @@
 	                  <td>{{$user->address}}</td>
                    	  <td>{{$user->created_at}}</td>
 	                  <td>
-                      <a href="{{route('admin.user.update',$user->id)}}" class="btn btn-xs btn-primary"><i class="fa fa-pencil">Edit</i></a>
                       <a href="{{route('admin.user.delete',$user->id)}}" class="btn btn-xs btn-danger"><i class="fa fa-trash">Delete</i></a> 
                     </td>
 	                </tr>

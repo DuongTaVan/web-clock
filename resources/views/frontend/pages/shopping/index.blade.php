@@ -43,8 +43,8 @@
                                     </td>
                                     <td>
                                         <div class="qty_number">
-                                            <input type="number"  min="1" class="input_quantity" name="quantity_14692" value="{{  $item->qty }}" id="">
-                                            <a href="{{route('frontend.shopping.delete',$key)}}" class="js-delete-item btn-action-delete"><i class="la la-trash"></i>Delete</a>
+                                            <input type="number"  min="1" class="input_quantity" name="quantity_14692" value="{{  $item->qty }}" onchange="update('{{ $item->rowId }}',this.value,'{{$item->id}}')">
+                                            <a href="{{route('frontend.shopping.delete',$key)}}" class="js-delete-item btn-action-delete"><i class="fa fa-trash"></i>Delete</a>
 
                                         </div>
                                     </td>
@@ -55,7 +55,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @if(\Cart::count()!=0)
                     <p style="float: right;margin-top: 20px;">Tổng tiền : <b id="sub-total">{{ \Cart::subtotal(0) }} đ</b></p>
+                    @else 
+                    <p>Không có sản phẩm trong giỏ hàng</p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -104,6 +108,21 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://codeseven.github.io/toastr/build/toastr.min.js"></script>
     <script type="text/javascript">
+        function update(rowId,qty,id)
+        {
+            //alert(id);
+            let url = "shopping/update/"+id+"/"+rowId+"/"+qty;
+           // alert(url);
+            $.ajax({
+              url: url,
+            })
+              .done(function(results) {
+                //alert(results.messages);
+                toastr.warning(results.messages);
+                location.reload();
+              });
+
+        }
         $(function() {
             $(".js-delete-item").click( function(event){
                 event.preventDefault();
