@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
-	use Notifiable;
+    use Notifiable;
 
     /**
      * Admins table.
@@ -35,7 +35,27 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function role(){
-        return $this->belongsToMany('App\Models\Role','App\Models\Role_admin','admin_id', 'role_id');
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsToMany('App\Models\Role', 'App\Models\Role_admin', 'admin_id', 'role_id');
+    }
+
+    public function Check_Permissions($checkPermission)
+    {
+        $roles = \Auth::guard('admin')->user()->role;
+       // dd($roles);
+        foreach ($roles as $role) {
+            $permissions = $role->permission;
+            if ($permissions->contains('name', $checkPermission)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

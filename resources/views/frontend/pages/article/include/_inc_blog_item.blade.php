@@ -6,6 +6,6 @@
     </div>
     <div class="info">
         <a href="{{route('frontend.blog_detail.index',$article->a_slug.'-'.$article->id)}}" title="{{$article->a_name}}">{{$article->a_name}}</a>
-        <p>{{$article->a_content}} </p>
+        <p>{!! $article->a_description !!} </p>
     </div>
 </div>

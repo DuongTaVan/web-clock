@@ -28,8 +28,8 @@ class AccountRequestRegister extends FormRequest
             'name'      => 'required',
             'phone'     => 'required|unique:users,phone,'.$this->id,
             'password'  => 'required',
-            'g-recaptcha-response'=>'required|recaptcha',
-          
+            'g-recaptcha-response' => 'required'
+
         ];
     }
 

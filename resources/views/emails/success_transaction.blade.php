@@ -38,8 +38,9 @@
         </div>
     </div>
     <div style="background: #f4f5f5;box-sizing: border-box;padding: 15px">
+        <p><h3>Contact</h3></p>
         <p style="margin:2px 0;color: #333">Email : duongtv2712@gmail.com</p>
         <p style="margin:2px 0;color: #333">Phone : 0337604001</p>
-        <p style="margin:2px 0;color: #333">Face : <a href="">Dương G-A</a></p>
+        <p style="margin:2px 0;color: #333">Face : <a href="https://www.facebook.com/dth999">Dương Tiền Hải</a></p>
     </div>
 </div>

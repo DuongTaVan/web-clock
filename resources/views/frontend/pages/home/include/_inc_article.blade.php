@@ -6,7 +6,7 @@
             <div class="item">
                 <div class="item__image">
                     <a href="{{route('frontend.blog_detail.index',$item->a_slug.'-'.$item->id)}}" title="{{ $item->a_name }}">
-                        <img class="lazyload lazy" src="{{  asset('images/preloader.gif') }}" data-src="{{ pare_url_file($item->a_avatar) }}" alt="{{ $item->a_name }}"> 
+                        <img class="lazyload lazy" src="{{  asset('images/preloader.gif') }}" data-src="{{ pare_url_file($item->a_avatar) }}" alt="{{ $item->a_name }}">
                     </a>
                     </div>
                 <div class="item__content">

@@ -5,7 +5,7 @@
 @stop
 @section('content')
     <div class="container">
-        
+
         <div class="auth" style="background: white;">
             <form class="from_cart_register" action="" method="post" style="width: 500px;margin:0 auto;padding: 30px 0">
                 @csrf
@@ -13,7 +13,7 @@
                     <label for="name">Name <span class="cRed">(*)</span></label>
                     <input name="name" id="name" type="text" value="{{  old('name') }}" class="form-control" placeholder="Nguyen Van A">
                     {!!showErrors($errors,'name')!!}
-                   
+
                 </div>
                 <div class="form-group">
                     <label for="name">Email <span class="cRed">(*)</span></label>
