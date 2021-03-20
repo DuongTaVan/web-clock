@@ -45,13 +45,13 @@
                 width: 25px;
                 height: 25px;
             }
-            
+
         </style>
 
 @stop
 @section('content')
     <div class="container">
-        
+
         @include('frontend/components/breadcrumb')
 
         <div class="card">
@@ -65,7 +65,7 @@
                                 <img class="sp-image" src="{{pare_url_file($product_image->pi_slug)}}" alt="">
                             </div>
                             @endforeach
-                            
+
                         </div>
                         <div class="sp-thumbnails">
                             @foreach($product_images as $product_image)
@@ -148,7 +148,7 @@
                                         <h2 class="infomation__title">Keyword</h2>
                                         <div class="infomation__group">
                                             <div class="item">
-                                                
+
                                                 @foreach($product->keywords as $keyword)
                                                     <a href=""
                                                        style="border: 1px solid #E91E63;display: inline-block;font-size: 13px;padding: 0 5px;border-radius: 5px;margin-right: 10px;color: #E91E63;">{{ $keyword->k_name }}</a>
@@ -190,8 +190,8 @@
                     </div>
                 @include('frontend.pages.product_detail.include._inc_list_comment')
                 </div>
-               
-            
+
+
             <div class="card-body product-des">
                 <div class="left">
                     <div class="tabs">
@@ -216,10 +216,11 @@
     </div>
 @stop
 @section('script')
-    <script src="{{ mix('js/product_detail.js') }}" type="text/javascript"></script>
-    
     <script type="text/javascript">
-    
+        <?php $js = file_get_contents('js/product_detail.js');echo $js;?>
+    </script>
+    <script type="text/javascript">
+
     $('.js-show-login').click(function(){
         console.log('a');
         event.preventDefault();
@@ -241,13 +242,13 @@
                 method:"POST",
                 url: URL,
             }).done(function(results){
-                
+
                 toastr.info(results.messages);
             });
-       
+
         });
 
-   
+
 
         $(".js-review").click(function (event){
             event.preventDefault();
@@ -260,7 +261,7 @@
                 $this.text('Gửi đánh giá').addClass('btn-success').removeClass('btn-default active')}
             else{
                 $this.text('Đóng lại').addClass('btn-default active').removeClass('btn-success')}
-            $('#block-review').slideToggle();      
+            $('#block-review').slideToggle();
         })
         // hover icon thay doi so sao danh gia
         let $item = $('#ratings i');
@@ -384,13 +385,13 @@
                 //alert(URL);
                 let comment = $this.parents('form').find("textarea").val();
                 if (!comment.length) {
-                    
+
                     toastr.warning('Nội dung không được để trống!');
-                    
+
                     return false;
                 }
                 //let $item = $this.parentsUntil('.item');
-                
+
                 $.ajax({
                     headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -420,7 +421,7 @@
                 });
 
         })
-           
+
 
         })
         $('.js-like').click(function(even){
@@ -433,7 +434,7 @@
             let data = {commentID: commentID, productID: productID}
             //let $item = $this.parentsUntil('.item');
            $.ajax({
-             
+
             headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -448,9 +449,9 @@
               });
 
         })
-        
-        
+
+
     });
-   
+
     </script>
 @stop

@@ -26,7 +26,7 @@
                         @endforeach
                     </ul>
                 </div>
-                
+
                 @include('frontend.components.top_product',['top_producs'=>$top_produc_pays])
                 @include('frontend.components.top_article',['products'=>$top_articles])
             </div>
@@ -34,5 +34,5 @@
     </div>
 @stop
 @section('script')
-   
+
 @stop

@@ -8,7 +8,7 @@
             .rating i.no_active{
                 color: #e8e8e8;
             }
-            
+
     #box-news .bot {
         display: flex;
         flex-wrap: wrap;
@@ -25,12 +25,12 @@
             box-shadow: 0 5px 20px rgba(0,0,0,.05);
         }
         #box-news .bot .item__image img {
-             
+
                 width: 100%;
                 height: 210px;
                 -o-object-fit: cover;
                 object-fit: cover;
-          
+
         }
         #box-news .bot .item__content {
             padding: 10px 15px;}
@@ -48,7 +48,7 @@
             color: #707070;
             display: inline-block;
         }
-           
+
 
         #box-news .bot .item__content .title {
             margin-bottom: 10px;
@@ -79,7 +79,7 @@
             -webkit-box-orient: vertical;
         }
         @media (max-width: 767px) {
-         
+
         #box-news .bot {
             margin: 0;
         }
@@ -88,13 +88,13 @@
                 width: 100%;
                 max-width: 100%;
             }
-        
+
     }
 
 
 
-           
-            
+
+
         </style>
 
 @stop
@@ -110,7 +110,7 @@
                 </div>
             @endforeach
         </div>
-      
+
         <div class="product-one">
             <div class="top">
                 <a href="#" title="" class="main-title">SẢN PHẨM NỔI BẬT</a>
@@ -142,7 +142,7 @@
 
         @include('frontend.pages.home.include._inc_flash_sale')
 
-        
+
 
         <div class="product-three">
             <div class="top">
@@ -248,6 +248,8 @@
 
 @stop
 @section('script')
-    <script src="{{ mix('js/home.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        <?php $js = file_get_contents('js/home.js');echo $js;?>
+    </script>
 
 @stop

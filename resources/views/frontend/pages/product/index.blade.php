@@ -35,7 +35,7 @@
                             <li>
                                 <label>
                                     <a href="{{request()->fullUrlWithQuery(['price'=>$i])}}">Giá &lt; {{$i*2}} triệu</a>
-                                   
+
                                 </label>
                             </li>
                         @endfor
@@ -64,5 +64,7 @@
 
 @stop
 @section('script')
-    <script src="{{ mix('js/product_search.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        <?php $js = file_get_contents('js/product_search.js');echo $js;?>
+    </script>
 @stop
