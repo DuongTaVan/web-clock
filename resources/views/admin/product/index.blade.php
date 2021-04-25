@@ -1,7 +1,5 @@
 @extends('layouts.app_master_admin')
 @section('content')
-
-  
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -14,10 +12,8 @@
         <li class="active">List</li>
       </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
-
       <!-- Default box -->
       <div class="box">
         <div class="box-header width-border">
@@ -30,18 +26,16 @@
                     <table class="table">
                     <tbody><tr>
                       <th style="width: 10px">#</th>
-                      <th>Name</th>
-                      <th>Avatar</th>
-                      <th>Category</th>
-                      <th>Price</th>
-                      <th>Hot</th>
-                      <th>Status</th>
-                      <th>Time</th>
-                      <th>Action</th>
+                      <th>Tên</th>
+                      <th>Hình ảnh</th>
+                      <th>Danh mục</th>
+                      <th>Giá</th>
+                      <th>Nổi bật</th>
+                      <th>Trạng thái</th>
+                      <th>Thời gian</th>
+                      <th>Tùy chỉnh</th>
                     </tr>
-                    
                     @foreach($product as $pr)
-
                     <tr>
                       <td>{{$pr->id}}</td>
                       <td>{{$pr->pro_name}}</td>
@@ -50,13 +44,10 @@
                       <td>
                         @if($pr->pro_sale == 0)
                         <span>{{number_format($pr->pro_price,0,",",".")}} đ</span>
-                        
                         @else
                         <span style="text-decoration: line-through;">{{number_format($pr->pro_price,0,",",".")}} đ</span><br>
                         <span>{{number_format(($pr->pro_price)-($pr->pro_price)*($pr->pro_sale)/100,0,",",".")}} đ</span>
                         @endif 
-
-
                       </td>
                       <td>
                       @if($pr->pro_hot==1)

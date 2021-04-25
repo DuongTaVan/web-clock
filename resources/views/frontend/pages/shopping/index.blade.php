@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label for="email">Email <span class="cRed">(*)</span></label>
                             <input name="tst_email" id="email" required="" value="{{ get_data_user('web','email') }}"
-                                   type="text" value="" class="form-control">
+                                   type="email" value="" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="note">Ghi chú thêm</label>
@@ -133,8 +133,6 @@
                 url: url,
             })
                 .done(function (results) {
-                    //alert(results.messages);
-                    toastr.warning(results.messages);
                     location.reload();
                 });
 

@@ -33,11 +33,11 @@
                             <tbody>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>Name</th>
+                                <th>Vai trò</th>
 
-                                <th>Display Name</th>
-                                <th>Time</th>
-                                <th>Action</th>
+                                <th>Hiển thị</th>
+                                <th>Thời gian</th>
+                                <th>Tùy chỉnh</th>
                             </tr>
                             @foreach($roles as $role)
                                 <tr>

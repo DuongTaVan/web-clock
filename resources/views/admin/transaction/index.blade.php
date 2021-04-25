@@ -48,12 +48,12 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Info</th>
-	                  <th>Money</th>
-	                  <th>Account</th>
-	                  <th>Satus</th>
-                      <th>Time</th>
-	                  <th>Action</th>
+	                  <th>Thông tin</th>
+	                  <th>Tổng tiền</th>
+	                  <th>Tài khoản</th>
+	                  <th>Trạng thái</th>
+                      <th>Thời gian</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
                   @foreach($transaction as $tran)
 	                <tr>

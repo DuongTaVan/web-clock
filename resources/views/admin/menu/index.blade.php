@@ -30,12 +30,12 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Name</th>
-	                  <th>Avatar</th>
-	                  <th>Status</th>
-	                  <th>Hot</th>
-                    <th>Time</th>
-	                  <th>Action</th>
+	                  <th>Tên</th>
+	                  <th>Hình ảnh</th>
+	                  <th>Trạng thái</th>
+	                  <th>Nổi bật</th>
+                    <th>Thời gian</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
                   @foreach($menu as $mn)
 	                <tr>

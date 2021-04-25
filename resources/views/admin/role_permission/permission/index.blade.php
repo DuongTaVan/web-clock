@@ -30,11 +30,11 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Name</th>
+	                  <th>Quyền</th>
 	                 
-	                  <th>Display Name</th>
-	                  <th>Time</th>
-	                  <th>Action</th>
+	                  <th>Hiển thị</th>
+	                  <th>Thời gian</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
                   @foreach($permissions as $permission)
 	                <tr>

@@ -107,7 +107,6 @@
    };
 
     CKEDITOR.replace( 'content' ,options);
-    CKEDITOR.replace( 'description' ,options);
 </script>
 
 

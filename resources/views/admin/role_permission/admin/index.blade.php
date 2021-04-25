@@ -33,14 +33,14 @@
                             <tbody>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>Name</th>
+                                <th>Tên</th>
 
                                 <th>Email</th>
-                                <th>Avatar</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-                                <th>Time</th>
-                                <th>Action</th>
+                                <th>Hình ảnh</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Thời gian</th>
+                                <th>Tùy chỉnh</th>
                             </tr>
                             @foreach($admins as $admin)
                                 <tr>

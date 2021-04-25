@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('frontend.product.cate_search','Kính mắt')}}" title="Kính mát thời trang">
+                            <a href="{{route('frontend.product.cate_search','Kính')}}" title="Kính mát thời trang">
                                     <span class="name">
                                         Kính mắt
                                     </span>
@@ -107,7 +107,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('frontend.product.cate_search','Phụ kiện')}}" title="Phụ kiện đồng hồ">
+                            <a href="{{route('frontend.product.cate_search','Dây')}}" title="Dây">
                                     <span class="name">
                                         Phụ kiện
                                     </span>

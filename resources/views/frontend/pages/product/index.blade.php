@@ -35,7 +35,6 @@
                             <li>
                                 <label>
                                     <a href="{{request()->fullUrlWithQuery(['price'=>$i])}}">Giá &lt; {{$i*2}} triệu</a>
-
                                 </label>
                             </li>
                         @endfor
@@ -57,9 +56,7 @@
                 </div>
                 <div style="clear: both;">{!!$product->appends([])->links()!!}</div>
             </div>
-
         </div>
-
     </div>
 
 @stop

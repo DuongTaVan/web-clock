@@ -18,30 +18,4 @@
             </div>
         </div>
     @endif
-         @foreach($attributes as $key => $attribute)
-
-                <div class="item">
-                <div class="item__title">{{$key}}</div>
-                <div class="item__content">
-                    <ul>
-                        @foreach($attribute as $item)
-                       
-                        <li>
-                            <label >
-                            <a href="{{request()->fullUrlWithQuery(['attr'.$item['id']=>$item['id']])}}"><h2><span>{{$item['atb_name']}}</span></h2></a>
-                                
-                            </label>
-                        </li>
-                        @endforeach
-                        
-                       
-                        
-
-                    </ul>
-                </div>
-               
-
-                </div>
-         @endforeach
-   
 </div>

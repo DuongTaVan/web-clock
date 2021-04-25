@@ -30,13 +30,13 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Name</th>
-	                  <th>Slug</th>
-	                  <th>Location</th>
-	                  <th>Avatar</th>
-                    <th>Hot</th>
-                    <th>Active</th>
-	                  <th>Action</th>
+	                  <th>Tên</th>
+	                  <th>Tên hiển thị</th>
+	                  <th>Địa chỉ</th>
+	                  <th>Hình ảnh</th>
+                    <th>Nổi bật</th>
+                    <th>Hoạt động</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
 
                   @foreach($events as $event)

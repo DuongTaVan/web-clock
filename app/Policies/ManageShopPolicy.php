@@ -30,6 +30,7 @@ class ManageShopPolicy
 
     public function category()
     {
+        //dd(1);
         return $this->admin->Check_Permissions('category');
     }
 

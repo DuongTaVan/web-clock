@@ -49,14 +49,14 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Name</th>
-                    <th>Avatar</th>
-                    <th>Category</th>
-	                  <th>Price</th>  
-                    <th>Sold</th>  
-                    <th>Rest</th>  
-                    <th>View</th>
-                    <th>Review</th> 
+	                  <th>Tên</th>
+                    <th>Hình ảnh</th>
+                    <th>Danh mục</th>
+	                  <th>Giá</th>  
+                    <th>Đã bán</th>  
+                    <th>Còn lại</th>  
+                    <th>Lượt xem</th>
+                    <th>Đánh giá</th> 
 	                  
 	                </tr>
                   @if(isset($warehoses))

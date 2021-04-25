@@ -30,12 +30,12 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Name</th>
-	                  <th>Slug</th>
-	                  <th>Avatar</th>
-                    <th>Hot</th>
-                    <th>Active</th>
-	                  <th>Action</th>
+	                  <th>Tên</th>
+	                  <th>Hiển thị</th>
+	                  <th>Hình ảnh</th>
+                    <th>Trạng thái</th>
+                    <th>Hoạt động</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
 
                   @foreach($trademarks as $trademark)

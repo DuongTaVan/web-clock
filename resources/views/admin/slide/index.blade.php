@@ -30,13 +30,13 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Name</th>
-	                  <th>Slug</th>
-	                  <th>Avatar</th>
-	                  <th>Hot</th>
-	                  <th>Active</th>
+	                  <th>Tên</th>
+	                  <th>Hiển thị</th>
+	                  <th>Hình ảnh</th>
+	                  <th>Nổi bật</th>
+	                  <th>Hoạt động</th>
                       
-	                  <th>Action</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
 	              @if(isset($slides))
                   @foreach($slides as $slide)

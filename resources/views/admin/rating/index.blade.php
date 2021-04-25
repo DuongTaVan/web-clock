@@ -37,12 +37,12 @@
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
 	                  
-	                  <th>User</th>
-	                  <th>Product</th>
-	                  <th>Rating</th>
-	 				  <th>Content</th>
-                      <th>Time</th>
-	                  <th>Action</th>
+	                  <th>Tên</th>
+	                  <th>Sản phẩm</th>
+	                  <th>Đánh giá</th>
+	 				  <th>Nội dung</th>
+                      <th>Thời gian</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
 
                   @foreach($ratings as $rating)

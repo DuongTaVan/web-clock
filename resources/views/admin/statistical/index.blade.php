@@ -64,8 +64,8 @@
         <div class="row" style="margin-bottom: 15px;">
         <div class="col-sm-8">
             <figure class="highcharts-figure">
-                <div id="container2"></div>
-                
+            <div id="container2" data-list-day="{{ $listDay }}" data-money-default={{ $arrRevenueTransactionMonthDefault }} data-money={{ $arrRevenueTransactionMonth }}>         
+            </div>
             </figure>
         </div>
         <div class="col-sm-4">
@@ -96,11 +96,11 @@
                         <table class="table no-margin">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Item</th>
-                                    <th>Avatar</th>
-                                    <th>Category</th>
-                                    <th>Pay</th>
+                                    <th>ID</th>
+                                    <th>Mặt hàng</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Danh mục</th>
+                                    <th>Đã mua</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -186,10 +186,14 @@
 <script type="text/javascript">
         let dataTransaction = $("#container").attr('data-json');
         dataTransaction  =  JSON.parse(dataTransaction);
+        let listday = $("#container2").attr("data-list-day");
+        listday = JSON.parse(listday);
 
-       
-
-     
+        let listMoneyMonth = $("#container2").attr('data-money');
+        listMoneyMonth = JSON.parse(listMoneyMonth);
+        
+        let listMoneyMonthDefault = $("#container2").attr('data-money-default');
+        listMoneyMonthDefault = JSON.parse(listMoneyMonthDefault);
         Highcharts.chart('container', {
 
             chart: {
@@ -214,38 +218,58 @@
         });
         Highcharts.chart('container2', {
             chart: {
-                type: 'line'
+                type: 'spline'
             },
             title: {
-                text: 'Monthly Average Temperature'
+                text: 'Biểu đồ doanh thu các ngày trong tháng'
             },
             subtitle: {
                 text: 'Source: WorldClimate.com'
             },
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                categories: listday
             },
             yAxis: {
                 title: {
-                    text: 'Temperature (°C)'
+                    text: 'Temperature'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value + '°';
+                    }
                 }
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
             },
             plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
+                spline: {
+                    marker: {
+                        radius: 4,
+                        lineColor: '#666666',
+                        lineWidth: 1
+                    }
                 }
             },
-            series: [{
-                name: 'Tokyo',
-                data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-            }, {
-                name: 'London',
-                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-            }]
+            series: [
+            	{
+                    name: 'Hoàn tất giao dịch',
+                    marker: {
+                        symbol: 'square'
+                    },
+                    data: listMoneyMonth
+                },
+                {
+                    name: 'Tiếp nhận',
+                    marker: {
+                        symbol: 'square'
+                    },
+                    data: listMoneyMonthDefault
+                }
+            ]
         });
+
 
        
      

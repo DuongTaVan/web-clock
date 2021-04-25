@@ -45,6 +45,9 @@
                 width: 25px;
                 height: 25px;
             }
+            .clear-both{
+                clear: both;
+            }
 
         </style>
 
@@ -165,7 +168,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="clear-both">
+                </div>
             </div>
+            <div class="description">
+                <h4 class="reviews-title">Chế độ bảo hành</h4>
+                <p>{!!$product->pro_description!!}</p>
+                <br> <br>
+                </div>
             @include('frontend.pages.product_detail.include._inc_ratings')
             <div class="review_list">
             @include('frontend.pages.product_detail.include._inc_list_reviews')

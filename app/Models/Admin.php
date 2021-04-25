@@ -49,7 +49,7 @@ class Admin extends Authenticatable
     public function Check_Permissions($checkPermission)
     {
         $roles = \Auth::guard('admin')->user()->role;
-       // dd($roles);
+        //dd($roles);
         foreach ($roles as $role) {
             $permissions = $role->permission;
             if ($permissions->contains('name', $checkPermission)) {

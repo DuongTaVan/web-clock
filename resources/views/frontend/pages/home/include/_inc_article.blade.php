@@ -12,7 +12,7 @@
                 <div class="item__content">
                     <div class="date-time"> <i class="fa fa-calendar"></i> <span>{{ $item->created_at }}</span> </div>
                     <h3> <a href="{{route('frontend.blog_detail.index',$item->a_slug.'-'.$item->id)}}" class="title" title="{{ $item->a_name }}">{{ $item->a_name }}</a> </h3>
-                    <p class="description"> {{ $item->a_content }}</p>
+                    <div class="description"> {!! $item->a_content !!}</div>
                 </div>
             </div>
         </div>

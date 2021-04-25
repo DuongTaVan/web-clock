@@ -48,7 +48,6 @@
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -56,36 +55,6 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="{{\Auth::guard('admin')->user()->avatar}}" class="img-circle"
-                                                     alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <!-- end message -->
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li>
                     <!-- Notifications: style can be found in dropdown.less -->
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -107,40 +76,6 @@
                                 </ul>
                             </li>
                             <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>
-                    <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                     role="progressbar"
-                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
                         </ul>
                     </li>
                     <!-- User Account: style can be found in dropdown.less -->
@@ -166,11 +101,11 @@
                             <li class="user-footer">
                                 <div class="pull-left">
                                     <a href="{{route('profile.list',\Auth::guard('admin')->user()->id)}}"
-                                       class="btn btn-default btn-flat">Profile</a>
+                                       class="btn btn-default btn-flat">Hồ sơ</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{route('admin.account.getLogoutAdmin')}}"
-                                       class="btn btn-default btn-flat">Sign out</a>
+                                       class="btn btn-default btn-flat">Đăng xuất</a>
                                 </div>
                             </li>
                         </ul>
@@ -197,17 +132,17 @@
                 </div>
                 <div class="pull-left info">
                     <p>{{get_data_user('admin','name')}}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Hoạt động</a>
                 </div>
             </div>
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header">Thanh điều hướng</li>
                 @can('admin-list')
                     <li class="treeview">
                         <a href="">
-                            <i class="fa fa-exclamation-triangle"></i> <span>Role Permission</span>
+                            <i class="fa fa-exclamation-triangle"></i> <span>Phân quyền</span>
                             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -217,10 +152,10 @@
                                 <li><a href="{{route('user.list')}}"><i class="fa fa-circle-o"></i> Admin</a></li>
                             @endcan
                             @can('role-list')
-                                <li><a href="{{route('role.list')}}"><i class="fa fa-circle-o"></i> Role</a></li>
+                                <li><a href="{{route('role.list')}}"><i class="fa fa-circle-o"></i> Vai trò</a></li>
                             @endcan
                             @can('permission')
-                                <li><a href="{{route('permission.list')}}"><i class="fa fa-circle-o"></i> Permission</a>
+                                <li><a href="{{route('permission.list')}}"><i class="fa fa-circle-o"></i>Quyền</a>
                                 </li>
                             @endcan
                         </ul>
@@ -230,7 +165,7 @@
                     <li class="">
 
                         <a href="{{route('admin.category.index')}}">
-                            <i class="fa fa-edit"></i> <span>Category</span>
+                            <i class="fa fa-edit"></i> <span>Danh mục</span>
 
                         </a>
 
@@ -239,7 +174,7 @@
                 @can('key')
                     <li class="">
                         <a href="{{route('admin.keyword.index')}}">
-                            <i class="fa fa-key"></i> <span>Keyword</span>
+                            <i class="fa fa-key"></i> <span>Từ khóa</span>
 
                         </a>
 
@@ -248,7 +183,7 @@
                 @can('attribute')
                     <li class="">
                         <a href="{{route('admin.attribute.index')}}">
-                            <i class="fa fa-exchange"></i> <span>Attribute</span>
+                            <i class="fa fa-exchange"></i> <span>Thuộc tính</span>
 
                         </a>
 
@@ -257,7 +192,7 @@
                 @can('product')
                     <li class="">
                         <a href="{{route('admin.product.index')}}">
-                            <i class="fa fa-database"></i> <span>Product</span>
+                            <i class="fa fa-database"></i> <span>Sản phẩm</span>
 
                         </a>
                     </li>
@@ -265,7 +200,7 @@
                 @can('user')
                     <li class="">
                         <a href="{{route('admin.user.index')}}">
-                            <i class="fa fa-user"></i> <span>User</span>
+                            <i class="fa fa-user"></i> <span>Người dùng</span>
 
                         </a>
 
@@ -274,7 +209,7 @@
                 @can('transaction')
                     <li class="">
                         <a href="{{route('admin.transaction.index')}}">
-                            <i class="fa fa-money"></i> <span>Transaction</span>
+                            <i class="fa fa-money"></i> <span>Đơn hàng</span>
 
                         </a>
 
@@ -292,7 +227,7 @@
                 @can('article')
                     <li class="">
                         <a href="{{route('admin.article.index')}}">
-                            <i class="fa fa-file-text-o"></i> <span>Article</span>
+                            <i class="fa fa-file-text-o"></i> <span>Bài viết</span>
 
                         </a>
 
@@ -301,7 +236,7 @@
                 @can('rating')
                     <li class="">
                         <a href="{{route('admin.rating.index')}}">
-                            <i class="fa fa-star"></i> <span>Rating</span>
+                            <i class="fa fa-star"></i> <span>Đánh giá</span>
 
                         </a>
 
@@ -310,30 +245,29 @@
                 @can('warehouse')
                     <li class="">
                         <a href="{{route('admin.warehouse.index')}}">
-                            <i class="fa fa-home"></i> <span>Warehouse</span>
+                            <i class="fa fa-home"></i> <span>Kho</span>
 
                         </a>
 
                     </li>
                 @endcan
 
-                <li class="header">LABELS</li>
                 @can('slide')
                     <li><a href="{{route('admin.slide.index')}}"><i class="fa fa-circle-o text-red"></i>
                             <span>Slide</span></a>
                     </li>
                 @endcan
                 @can('statistical')
-                    <li><a href="{{route('admin.statistical.index')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Statistical</span></a>
+                    <li><a href="{{route('admin.statistical.index')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Thống kê</span></a>
                     </li>
                 @endcan
                 @can('trademark')
-                    <li><a href="{{route('admin.trademark.index')}}"><i class="fa fa-circle-o text-blue"></i> <span>Trademark</span></a>
+                    <li><a href="{{route('admin.trademark.index')}}"><i class="fa fa-circle-o text-blue"></i> <span>Thương hiệu</span></a>
                     </li>
                 @endcan
                 @can('event')
                     <li><a href="{{route('admin.event.index')}}"><i class="fa fa-circle-o text-aqua"></i>
-                            <span>Event</span></a>
+                            <span>Sự kiện</span></a>
                     </li>
                 @endcan
             </ul>

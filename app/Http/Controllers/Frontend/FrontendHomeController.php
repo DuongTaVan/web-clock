@@ -9,7 +9,6 @@ use App\Models\{Product, Trademark, Category, Event, Slide, Articles};
 class FrontendHomeController extends Controller
 {
     public function index(){
-        //dd(1);
         $slides = Slide::where([
                         ['s_hot', 1],
                         ['s_active', 1]])->orderBy('id','DESC')->take(4)->get();
@@ -51,7 +50,7 @@ class FrontendHomeController extends Controller
         //$epos = $epos->product->take(5);
         //dd($epos);
     	$pens = Category::with('product')->where('c_name','BÚT KÝ CAO CẤP')->orderBy('id','DESC')->first();
-        //$pens = $pens->product->take(5);
+        $pens = $pens->product->take(5);
     	$glasses = Category::with('product')->where('c_name','KÍNH MẮT THỜI TRANG')->orderBy('id','DESC')->first();
         $articlesHots = Articles::where([
             'a_active' => 1,
@@ -62,8 +61,7 @@ class FrontendHomeController extends Controller
             ->limit(4)
             ->get();
 
-        //$glasses = $glasses->product->take(5);
-    	//dd($philippes);
+        $glasses = $glasses->product->take(5);
     	$data = [
     		'diamonds' =>$diamonds,
     		'epos' =>$epos,

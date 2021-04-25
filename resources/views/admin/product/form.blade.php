@@ -41,9 +41,10 @@
                             </select>
                         </div>
                     </div>
-                <div style="clear: both;" class="form-group ">
-                    <label for="exampleInputEmail1">Description</label>
-                    <textarea value="{{  $product->pro_description ?? old('pro_description',0) }}" name="pro_description" class="form-control" cols="5" rows="2" autocomplete="off">{{  $product->pro_description ?? old('pro_description') }}</textarea>
+            </div>
+            <div style="clear: both;" class="form-group ">
+                    <label for="exampleInputEmail1">Mô tả</label>
+                    <textarea id="description" value="{{  $product->pro_description ?? old('pro_description',0) }}" name="pro_description" class="form-control" rows="3" autocomplete="off">{{  $product->pro_description ?? old('pro_description') }}</textarea>
                     @if ($errors->first('pro_description'))
                         <span class="text-danger">{{ $errors->first('pro_description') }}</span>
                     @endif
@@ -53,13 +54,8 @@
                     <label class="control-label">Danh mục <b class="col-red">(*)</b></label>
                     <select name="pro_category_id" class="form-control ">
                         <option value="">__Click__</option>
-
-
-
-
-
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ ($product->pro_category_id ?? 0 == $category->id) ? "selected='selected'" : "" }}>
+                            <option value="{{ $category->id }}" {{ ($product->pro_category_id ?? 0) == $category->id ? "selected='selected'" : "" }}>
                                 {{  $category->c_name }}
                             </option>
                         @endforeach
@@ -69,32 +65,8 @@
                         <span class="text-danger">{{ $errors->first('pro_category_id') }}</span>
                     @endif
                 </div>
-            </div>
         </div>
         <div class="box box-warning">
-            <div class="box-header with-border">
-                <h3 class="box-title">Thuộc tính</h3>
-            </div>
-            <div class="box-body">
-
-                @foreach($attributes  as $key => $attribute)
-            
-                    <div class="form-group col-sm-3">
-                        <h4 style="border-bottom: 1px solid #dedede;padding-bottom: 10px;">{{ $key }}</h4>
-                        @foreach($attribute as $item)
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="attribute[]" 
-                                {{in_array($item["id"],$attributesOld)?"checked":""}}
-                                value="{{ $item['id'] }}"> {{ $item['atb_name'] }}
-                            </label>
-                         </div>
-                         @endforeach
-                         
-                    </div>
-                @endforeach
-
-            </div>
             <hr>
             <div class="box-header with-border">
                 <h3 class="box-title">Album ảnh</h3>
@@ -143,20 +115,6 @@
                 </div>
             </div>
         </div>
-        <div class="box box-warning">
-            <div class="box-header with-border">
-                <h3 class="box-title">Nội dung</h3>
-            </div>
-            <div class="box-body">
-                <div class="form-group ">
-                    <label for="exampleInputEmail1">Content</label>
-                    <textarea value="{{  $product->pro_content ?? old('pro_content',0) }}" name="pro_content" id="content" class="form-control textarea" cols="5" rows="2" >{{ $product->pro_content ?? '' }}</textarea>
-                    @if ($errors->first('pro_content'))
-                        <span class="text-danger">{{ $errors->first('pro_content') }}</span>
-                    @endif
-                </div>
-            </div>
-        </div>
     </div>
     <div class="col-sm-4">
         <div class="box box-warning">
@@ -194,3 +152,15 @@
             </div>
         </div>
     </div> --}}
+<script type="text/javascript" src="{{ asset('source/admin/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript">
+
+    var options = {
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+        filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+   };
+
+    CKEDITOR.replace( 'description' ,options);
+</script>

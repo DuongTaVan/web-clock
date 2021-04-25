@@ -30,11 +30,11 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Name</th>
-	                  <th>Type</th>
-	                  <th>Category</th>
-                    <th>Time</th>
-	                  <th>Action</th>
+	                  <th>Tên</th>
+	                  <th>Loại</th>
+	                  <th>Danh mục</th>
+                    <th>Thời gian</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
 
                   @foreach($attributes as $att)

@@ -8,6 +8,9 @@
             .rating i.no_active{
                 color: #e8e8e8;
             }
+            .product-two .bot .item .product-item .avatar{
+                height: 185px !important;
+            }
 
     #box-news .bot {
         display: flex;
@@ -90,11 +93,6 @@
             }
 
     }
-
-
-
-
-
         </style>
 
 @stop
@@ -198,7 +196,7 @@
 
         <div class="product-two">
             <div class="top">
-                <a href="#" class="main-title">ĐỒNG HỒ ATLANTIC SWISS</a>
+                <a href="#" class="main-title">ĐỒNG HỒ EPOS SWISS</a>
             </div>
             <div class="bot ">
                 @if(isset($epos))
@@ -217,7 +215,7 @@
             </div>
             <div class="bot js-product-5 owl-carousel owl-theme owl-custom">
                 @if(isset($pens))
-                @foreach($pens->product as $item)
+                @foreach($pens as $item)
                     <div class="item">
                         @include('frontend/components.product_item',['pr'=>$item])
                     </div>
@@ -232,7 +230,7 @@
             </div>
             <div class="bot">
                 @if(isset($glasses))
-                @foreach($glasses->product as $item)
+                @foreach($glasses as $item)
                     <div class="item">
                         @include('frontend/components.product_item',['pr'=>$item])
                     </div>
@@ -251,5 +249,4 @@
     <script type="text/javascript">
         <?php $js = file_get_contents('js/home.js');echo $js;?>
     </script>
-
 @stop

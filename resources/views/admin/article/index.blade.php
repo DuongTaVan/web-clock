@@ -27,12 +27,12 @@
                                 <tr>
                                     <th style="width: 10px">#</th>
                                     <th style="width: 25%">Name</th>
-                                    <th>Category</th>
-                                    <th>Avatar</th>
-                                    <th>Hot</th>
-                                    <th>Active</th>
-                                    <th>Time</th>
-                                    <th>Action</th>
+                                    <th>Danh mục</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Nổi bật</th>
+                                    <th>Hoạt động</th>
+                                    <th>Thời gian</th>
+                                    <th>Tùy chỉnh</th>
                                 </tr>
 
                             </tbody>

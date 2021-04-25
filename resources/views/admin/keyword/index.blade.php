@@ -30,11 +30,11 @@
 	          		<table class="table">
 	                <tbody><tr>
 	                  <th style="width: 10px">#</th>
-	                  <th>Name</th>
-	                  <th>Description</th>
-	                  <th>Hot</th>
-                      <th>Time</th>
-	                  <th>Action</th>
+	                  <th>Tên</th>
+	                  <th>Mô tả</th>
+	                  <th>Nổi bật</th>
+                      <th>Thời gian</th>
+	                  <th>Tùy chỉnh</th>
 	                </tr>
                   @foreach($keyword as $cate)
 	                <tr>

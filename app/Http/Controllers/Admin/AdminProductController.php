@@ -24,7 +24,6 @@ class AdminProductController extends Controller
     	return view('admin.product.create', compact('categories','attributes','attributesOld','keywords','keywordOld'));
     }
     public function store(AdminRequestProduct $Request){
-        
     	$product = new Product;
     	$product->pro_name = $Request->pro_name;
     	$product->pro_slug = Str::slug($Request->pro_name);
@@ -33,6 +32,7 @@ class AdminProductController extends Controller
         $product->pro_sale = $Request->pro_sale;
     	$product->created_at = Carbon::now();
         $product->pro_country = $Request->pro_country;
+        $product->pro_description = $Request->pro_description;
         $product->pro_number = $Request->pro_number;
         $product->pro_energy = $Request->pro_energy;
         $product->pro_resistant = $Request->pro_resistant;
@@ -44,14 +44,14 @@ class AdminProductController extends Controller
         $product->pro_avatar = $pro_avatar;
 
     	$product->save();
-        $attributes = $Request->attribute;
-        //dd($attributes);
-        foreach($attributes as $pa){
-            $atb = new ProductAttribute();
-            $atb->pa_product_id = $product->id;
-            $atb->pa_attribute_id = $pa;
-            $atb->save();
-        }
+        // $attributes = $Request->attribute;
+        // //dd($attributes);
+        // foreach($attributes as $pa){
+        //     $atb = new ProductAttribute();
+        //     $atb->pa_product_id = $product->id;
+        //     $atb->pa_attribute_id = $pa;
+        //     $atb->save();
+        // }
         $keyword = $Request->keywords;
         //dd($attributes);
         foreach($keyword as $kw){
@@ -99,6 +99,7 @@ class AdminProductController extends Controller
     	$product->created_at = Carbon::now();
         $product->pro_country = $Request->pro_country;
         $product->pro_sale = $Request->pro_sale;
+        $product->pro_description = $Request->pro_description;
         $product->pro_number = $Request->pro_number;
         $product->pro_energy = $Request->pro_energy;
         $product->pro_resistant = $Request->pro_resistant;
@@ -106,19 +107,20 @@ class AdminProductController extends Controller
             $image = upload_image('pro_avatar');
             if ($image['code'] == 1) 
                 $pro_avatar = $image['name'];
+            $product->pro_avatar = $pro_avatar;
         } 
-        $product->pro_avatar = $pro_avatar;
+        
     	$product->save();
         $attributes = $Request->attribute;
         $att = ProductAttribute::where('pa_product_id',$id)->delete();;
 
         //dd($att);
-        foreach($attributes as $pa){
-            $atb = new ProductAttribute();
-            $atb->pa_product_id = $product->id;
-            $atb->pa_attribute_id = $pa;
-            $atb->save();
-        }
+        // foreach($attributes as $pa){
+        //     $atb = new ProductAttribute();
+        //     $atb->pa_product_id = $product->id;
+        //     $atb->pa_attribute_id = $pa;
+        //     $atb->save();
+        // }
         $keyword = $Request->keywords;
         $pk = ProductKeyword::where('pk_product_id',$id)->delete();;
 

@@ -47,6 +47,10 @@ class ShoppingCartController extends Controller
         if (isset(Auth::user()->id)) {
             $transactions->tst_user_id = Auth::user()->id;
         }
+        else{
+            toastr()->error('Bạn phải đăng nhập để tiếp tục mua hàng');
+            return redirect()->route('frontend.account.login.index');
+        }
         $transactions->tst_total_money = str_replace(',', '', Cart::subtotal(0));
         $transactions->tst_name = $Request->tst_name;
         $transactions->tst_phone = $Request->tst_phone;
@@ -86,7 +90,8 @@ class ShoppingCartController extends Controller
         if ($request->ajax()) {
             $product = Product::find($id);
             if ($product->pro_number < $qty) {
-                return response(['messages' => 'Không đủ số lượng sản phẩm cần update']);
+                toastr()->warning('Không đủ số lượng sản phẩm cần update');
+                return response(['messages' => 'err']);
             }
 
             Cart::update($rowId, $qty);

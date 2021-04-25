@@ -1,12 +1,12 @@
 <table class="table table-condensed">
     <tbody><tr>
       <th style="width: 10px">#</th>
-      <th>Name</th>
-      <th>Avatar</th>
-      <th>Price</th>
-      <th>Qty</th>
-      <th>Total</th>
-      <th>Action</th>
+      <th>Tên</th>
+      <th>Hình ảnh</th>
+      <th>Giá</th>
+      <th>Số lượng</th>
+      <th>Tổng</th>
+      <th>Tùy chỉnh</th>
     </tr>
     @foreach($order as $or)
     <tr>
